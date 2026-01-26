@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legacy Academy – Build Your Empire</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body class="bg-black text-white">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark border-bottom border-warning">
+        <div class="container-fluid px-3 px-lg-5">
+            <a class="navbar-brand d-flex align-items-center me-auto" href="#">
+                <img src="image/logo.png" alt="Legacy Academy Logo" class="logo-img">
+            </a>
+
+            <button class="navbar-toggler custom-toggler border-2 border-warning" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-2">
+                    <li class="nav-item"><a class="nav-link fw-500" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link fw-500" href="#wisdom">Wisdom</a></li>
+                    <li class="nav-item"><a class="nav-link fw-500" href="#academy">Academy</a></li>
+                    <li class="nav-item"><a class="nav-link fw-500" href="#testimonials">Success</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="btn btn-legacy-gold fw-bold px-3 py-2 rounded-pill" href="#packages">JOIN NOW</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Urgency Banner -->
+    <div class="urgency-banner">
+        <span class="urgency-badge">LIMITED TIME</span> Lock in <span class="highlight-gold">$99.99/month</span> before price increase!
+    </div>
+
+    <!-- Hero -->
+    <section id="home" class="hero-section min-vh-100 d-flex align-items-center">
+        <div class="container text-center">
+            <h1 class="display-3 fw-black text-white text-uppercase mb-4">LEGACY ACADEMY</h1>
+            <p class="fs-2 fw-bold text-legacy-gold mb-4">BUILD YOUR EMPIRE – FROM ZERO TO LEGEND</p>
+            <p class="fs-5 text-gray-300 mb-5 max-w-3xl mx-auto">
+                Master money-making skills: E-commerce, Crypto, Copywriting, Fitness, AI & more.<br>
+                Join the next generation of winners. $99.99/month – Lock in now.
+            </p>
+            <a href="#packages" class="btn btn-cta btn-lg px-5 py-3">START YOUR LEGACY TODAY</a>
+            <p class="mt-4 text-gray-500">Thousands already building – Don't get left behind.</p>
+        </div>
+    </section>
+
+    <!-- Wisdom Section -->
+    <section id="wisdom" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-black text-center mb-16 text-legacy-gold uppercase">LEGACY WISDOM</h2>
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="text-center" data-aos="zoom-in">
+                    <img src="https://via.placeholder.com/400x300?text=Tenets+of+Success" alt="Tenets" class="rounded-2xl mb-6 mx-auto">
+                    <h3 class="text-3xl font-bold mb-4">TENETS OF SUCCESS</h3>
+                    <p>Unbreakable rules to dominate life.</p>
+                </div>
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="https://via.placeholder.com/400x300?text=Empire+Tales" alt="Tales" class="rounded-2xl mb-6 mx-auto">
+                    <h3 class="text-3xl font-bold mb-4">EMPIRE TALES</h3>
+                    <p>Wisdom for modern leaders.</p>
+                </div>
+                <div class="text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="https://via.placeholder.com/400x300?text=Young+Legends" alt="Young Legends" class="rounded-2xl mb-6 mx-auto">
+                    <h3 class="text-3xl font-bold mb-4">YOUNG LEGENDS</h3>
+                    <p>Build from zero to hero.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academy Section (Campuses) -->
+    <section id="academy" class="py-20 bg-black">
+        <div class="container mx-auto px-6 text-center" data-aos="fade-right">
+            <h2 class="text-6xl font-black mb-8 text-legacy-gold uppercase">LEGACY CAMPUSES</h2>
+            <p class="text-2xl mb-12 max-w-3xl mx-auto">Choose your path to wealth:</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up">
+                    <h3 class="text-3xl font-bold mb-4">E-COMMERCE</h3>
+                    <p>Master online sales and scale your business.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-3xl font-bold mb-4">CRYPTO</h3>
+                    <p>Build your portfolio and trade like a pro.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-3xl font-bold mb-4">COPYWRITING</h3>
+                    <p>Write words that sell and earn big.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-3xl font-bold mb-4 text-legacy-gold">AI AGENCY</h3>
+                    <p>Build automated AI businesses.</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="400">
+                    <h3 class="text-3xl font-bold mb-4 text-legacy-gold">CONTENT CREATION</h3>
+                    <p>Monetize your social media empire.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-black text-center mb-16 text-legacy-gold uppercase">OUR STUDENTS WINNING</h2>
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="bg-gray-900 p-8 rounded-2xl border border-legacy-gold/30 testimonial-card" data-aos="fade-up">
+                    <p class="text-xl mb-4 leading-relaxed text-white">"From consistent losses to profitable months. Risk management and psychology fixed – real results."</p>
+                    <p class="text-legacy-gold font-bold">– Alex, Germany</p>
+                    <p class="text-gray-400 text-sm mt-1">(Pro Package)</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-2xl border border-legacy-gold/30 testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-xl mb-4 leading-relaxed text-white">"Starter fixed LinkedIn + basics. Upgraded to Pro – worth it."</p>
+                    <p class="text-legacy-gold font-bold">– Marco, UK</p>
+                    <p class="text-gray-400 text-sm mt-1">(Starter → Pro)</p>
+                </div>
+                <div class="bg-gray-900 p-8 rounded-2xl border border-legacy-gold/30 testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-xl mb-4 leading-relaxed text-white">"Turned my portfolio around in 6 weeks. The AI tools alone saved me thousands in bad trades."</p>
+                    <p class="text-legacy-gold font-bold">– Sophie, Germany</p>
+                    <p class="text-gray-400 text-sm mt-1">(Elite Package)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trading Packages Section -->
+    <section id="packages" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="trading-hero">
+                <h1 class="text-legacy-gold">Accelerate Your Trading Mastery</h1>
+                <p>Elite 1-on-1 coaching with AI-powered tools, investment strategies, education modules, and more — elevate your skills today.</p>
+                <button class="btn-cta" id="ctaBtn">APPLY NOW</button>
+            </div>
+
+            <div class="packages-grid">
+                <div class="package-card">
+                    <h3>Starter Package</h3>
+                    <ul>
+                        <li>Intensive 1-on-1 session</li>
+                        <li>CV & LinkedIn optimization</li>
+                        <li>Trading fundamentals deep-dive</li>
+                        <li>AI-powered interactive lessons</li>
+                        <li>Basic investment strategies</li>
+                        <li>Custom charts & diagrams</li>
+                        <li>Video tutorials + simulations</li>
+                    </ul>
+                    <div class="package-price">
+                        <span class="original-price">2.000 EUR</span>
+                        <span>99.99 EUR</span>
+                        <span class="discount-pill">75% OFF</span>
+                    </div>
+                    <button class="package-btn" data-package="Starter" data-value="99.99">Select Starter</button>
+                </div>
+
+                <div class="package-card">
+                    <h3>Pro Package</h3>
+                    <ul>
+                        <li>8-week structured mentoring</li>
+                        <li>Advanced strategy breakdowns</li>
+                        <li>Ongoing support & resources</li>
+                        <li>AI-personalized learning paths</li>
+                        <li>Interactive market diagrams</li>
+                        <li>Backtesting tools + webinars</li>
+                        <li>AI-driven investment analysis</li>
+                        <li>Educational e-books on trading</li>
+                    </ul>
+                    <div class="package-price">
+                        <span class="original-price">5.000 EUR</span>
+                        <span>1.250 EUR</span>
+                        <span class="discount-pill">75% OFF</span>
+                    </div>
+                    <button class="package-btn" data-package="Pro" data-value="1250">Select Pro</button>
+                </div>
+
+                <div class="package-card">
+                    <h3>Premium Package</h3>
+                    <ul>
+                        <li>Elite unlimited 1-on-1 coaching</li>
+                        <li>Fully custom trading roadmap</li>
+                        <li>Exclusive private community</li>
+                        <li>Priority 24/7 support</li>
+                        <li>Advanced AI education modules</li>
+                        <li>Case studies + predictive tools</li>
+                        <li>Simulations, e-books, live sessions</li>
+                        <li>AI investment portfolio optimization</li>
+                        <li>Personalized risk management training</li>
+                    </ul>
+                    <div class="package-price">
+                        <span class="original-price">10.000 EUR</span>
+                        <span>2.500 EUR</span>
+                        <span class="discount-pill">75% OFF</span>
+                    </div>
+                    <button class="package-btn" data-package="Premium" data-value="2500">Select Premium</button>
+                </div>
+
+                <div class="package-card">
+                    <h3>Elite Package</h3>
+                    <ul>
+                        <li>Lifetime access to all updates</li>
+                        <li>VIP 1-on-1 coaching (no limits)</li>
+                        <li>Personal AI trading assistant setup</li>
+                        <li>Real-time trade alerts & reviews</li>
+                        <li>Custom algorithmic strategy development</li>
+                        <li>Exclusive mastermind group access</li>
+                        <li>Annual in-person / virtual retreat</li>
+                        <li>Direct founder mentorship sessions</li>
+                        <li>Full portfolio audit + optimization</li>
+                    </ul>
+                    <div class="package-price">
+                        <span class="original-price">25.000 EUR</span>
+                        <span>6.250 EUR</span>
+                        <span class="discount-pill">75% OFF</span>
+                    </div>
+                    <button class="package-btn" data-package="Elite" data-value="6250">Select Elite</button>
+                </div>
+            </div>
+
+            <p class="supported-text">Serving clients in Germany, Greece, and the United Kingdom.</p>
+
+            <div class="form-section" id="formSection">
+                <h2>Submit Your Application</h2>
+                <form id="applyForm">
+                    <input type="text" name="name" placeholder="Full Name" required/>
+                    <input type="email" name="email" placeholder="Email Address" required/>
+                    <input type="tel" name="phone" placeholder="Phone Number" required/>
+                    <input type="number" id="investment" name="investment" placeholder="Investment Amount (EUR)" min="0" step="10"/>
+                    <input type="hidden" id="selectedPackage" name="package"/>
+                    <div class="submit-wrapper">
+                        <button type="submit" class="submit-btn" id="submitBtn">SEND APPLICATION</button>
+                    </div>
+                    <div id="successMsg" class="success-msg"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section id="join" class="py-20 bg-black text-center">
+        <div class="container mx-auto px-6" data-aos="fade-up">
+            <h2 class="text-6xl font-black mb-8 text-legacy-gold uppercase">JOIN LEGACY ACADEMY</h2>
+            <p class="text-4xl mb-8 font-black text-legacy-gold">$99.99 / month – FOREVER (Lock in before increase!)</p>
+            <div class="bg-red-900 text-white py-4 px-6 rounded-xl mb-8 max-w-2xl mx-auto">
+                <p class="text-xl font-bold">98% SOLD OUT – Price increase imminent in 2026. Join now or miss out forever.</p>
+            </div>
+            <a href="#" class="bg-legacy-gold text-white text-3xl font-extrabold px-20 py-10 rounded-full hover:bg-yellow-400 transition transform hover:scale-110">
+                JOIN NOW & START WINNING
+            </a>
+            <p class="mt-8 text-gray-500">Price locked – Act fast before increase.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-12 border-t border-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-2xl mb-4 font-bold text-legacy-gold uppercase"></p>
+            <p class="text-gray-400">&copy; 2026 Legacy Academy. Build Your Future.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200 });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
