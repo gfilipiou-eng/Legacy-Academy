@@ -1,506 +1,498 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Legacy Academy – Build Your Empire</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LEGACY ACADEMY — BEYOND THE MATRIX</title>
 
-    <!-- Bootstrap & AOS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   LEGACY ACADEMY — INDEX PAGE CSS (2026)
+   ============================================ */
 
-    <!-- EmailJS -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+:root{
+  --gold:#c5a059;
+  --gold-bright:#f1d592;
+  --muted:#bdbdbd;
+  --bg:#000;
+  --card:#0b0b0b;
+  --nav-h:84px;
+  --max-width:1250px;
+  --font:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+}
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  background:#000;
+  color:#fff;
+  font-family:var(--font);
+  overflow-x:hidden;
+  padding-top:var(--nav-h);
+  line-height:1.4;
+}
 
-    <!-- Το δικό σου CSS (ακριβώς όπως το έστειλες) -->
-    <style>
-        :root {
-            --bg: #080808;
-            --card: #111111;
-            --text: #f5f5f5;
-            --light: #bbbbbb;
-            --accent: #d4b36a;
-            --accent-dark: #b89a50;
-            --border: #2a2a2a;
-            --input-bg: #161616;
-            --discount-bg: #ff4d4d;
-            --discount-text: #fff;
-        }
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            font-size: clamp(14px, 4vw, 16px);
-        }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
-        .hero {
-            background: linear-gradient(135deg, #161616, #0c0c0c);
-            border-radius: 14px;
-            padding: clamp(40px, 10vw, 60px) clamp(15px, 5vw, 20px);
-            margin: clamp(20px, 5vw, 25px) 0 clamp(40px, 10vw, 50px);
-            text-align: center;
-            border: 1px solid var(--border);
-        }
-        .hero h1 { color: var(--accent); font-size: clamp(28px, 7vw, 42px); font-weight: 700; margin-bottom: 16px; }
-        .hero p { color: var(--light); max-width: 640px; margin: 0 auto 24px; font-size: clamp(14px, 4vw, 16px); }
-        .btn {
-            background: var(--accent);
-            color: #000;
-            font-weight: 600;
-            padding: clamp(12px, 4vw, 16px) clamp(30px, 8vw, 40px);
-            border-radius: 50px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: clamp(14px, 4vw, 16px);
-        }
-        .btn:hover { background: var(--accent-dark); }
-        .packages {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: clamp(16px, 4vw, 24px);
-            margin: clamp(30px, 8vw, 40px) 0;
-        }
-        .package {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: clamp(24px, 6vw, 32px) clamp(15px, 5vw, 20px);
-            text-align: center;
-        }
-        .package h3 { color: var(--accent); font-size: clamp(20px, 5vw, 24px); margin-bottom: clamp(16px, 4vw, 20px); }
-        .package ul { list-style: none; padding: 0; margin: clamp(16px, 4vw, 20px) 0; text-align: left; }
-        .package li { margin: clamp(8px, 2vw, 10px) 0; color: var(--light); font-size: clamp(13px, 3.5vw, 15px); }
-        .price {
-            font-size: clamp(28px, 7vw, 32px);
-            font-weight: 700;
-            color: var(--text);
-            margin: clamp(20px, 5vw, 24px) 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        .original-price { font-size: clamp(20px, 5vw, 24px); text-decoration: line-through; color: var(--light); }
-        .discount-pill {
-            background: var(--discount-bg);
-            color: var(--discount-text);
-            font-weight: 600;
-            padding: clamp(6px, 1.5vw, 8px) clamp(15px, 4vw, 20px);
-            border-radius: 50px;
-            font-size: clamp(12px, 3vw, 14px);
-        }
-        .package-btn {
-            width: 100%;
-            padding: clamp(10px, 3vw, 14px);
-            background: var(--accent);
-            color: #000;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: clamp(13px, 3.5vw, 15px);
-        }
-        .package-btn:hover { background: var(--accent-dark); }
-        .package-btn.selected {
-            background: transparent;
-            color: var(--accent);
-            border: 2px solid var(--accent);
-        }
-        .supported {
-            text-align: center;
-            color: var(--light);
-            margin: clamp(30px, 8vw, 40px) 0;
-            font-size: clamp(13px, 3.5vw, 15px);
-        }
-        .form-section {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: clamp(30px, 8vw, 40px) clamp(20px, 5vw, 25px);
-            max-width: 680px;
-            margin: 0 auto clamp(60px, 15vw, 80px);
-        }
-        .form-section h2 { color: var(--accent); text-align: center; margin-bottom: clamp(24px, 6vw, 32px); font-size: clamp(24px, 6vw, 28px); }
-        input {
-            width: 100%;
-            height: clamp(48px, 12vw, 54px);
-            padding: 0 clamp(15px, 4vw, 20px);
-            margin: clamp(10px, 2.5vw, 12px) 0;
-            border: 1px solid #333;
-            border-radius: 50px;
-            background: var(--input-bg);
-            color: #eee;
-            font-size: clamp(13px, 3.5vw, 15px);
-        }
-        input:focus { outline: none; border-color: var(--accent); }
-        input::placeholder { color: #777; }
-        .submit-wrapper { text-align: center; margin: clamp(24px, 6vw, 32px) 0; }
-        .submit-btn {
-            padding: clamp(14px, 4vw, 18px) clamp(40px, 10vw, 60px);
-            font-size: clamp(15px, 4vw, 17px);
-            background: var(--accent);
-            color: #000;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-        }
-        .submit-btn:hover { background: var(--accent-dark); }
-        .success-msg {
-            margin-top: clamp(16px, 4vw, 20px);
-            text-align: center;
-            padding: clamp(10px, 3vw, 14px);
-            border-radius: 8px;
-            font-weight: 500;
-            font-size: clamp(13px, 3.5vw, 15px);
-        }
-        .success { background: rgba(100,220,140,0.15); color: #7f7; }
-        .error { background: rgba(255,100,100,0.15); color: #f77; }
-    </style>
+/* ============================
+   NAVBAR
+   ============================ */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:var(--nav-h);
+  background:rgba(0,0,0,0.75);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.nav-inner{
+  width:100%;
+  max-width:var(--max-width);
+  padding:0 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo-img{
+  height:60px;
+  filter:drop-shadow(0 0 10px rgba(197,160,89,0.4));
+}
+
+/* MENU */
+.nav-menu{
+  list-style:none;
+  display:flex;
+  gap:36px;
+}
+
+.nav-menu a{
+  color:#fff;
+  text-decoration:none;
+  font-family:'Montserrat',sans-serif;
+  font-weight:700;
+  letter-spacing:1.5px;
+  font-size:15px;
+  position:relative;
+}
+
+.nav-menu a::after{
+  content:"";
+  position:absolute;
+  bottom:-6px;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--gold);
+  transition:.3s;
+}
+
+.nav-menu a:hover::after{
+  width:100%;
+}
+
+/* MOBILE NAV */
+@media(max-width:850px){
+  nav{
+    height:auto;
+    padding:16px 0;
+  }
+  .nav-inner{
+    flex-direction:column;
+    gap:14px;
+  }
+  .nav-menu{
+    flex-direction:row;
+    gap:22px;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+  .logo-img{
+    height:54px;
+  }
+}
+
+/* ============================
+   HERO
+   ============================ */
+.hero{
+  text-align:center;
+  padding:120px 20px 80px;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.hero-title{
+  font-family:'Montserrat',sans-serif;
+  font-size:clamp(45px,12vw,95px);
+  font-weight:900;
+  letter-spacing:-3px;
+  line-height:0.9;
+}
+
+.hero-title span{
+  color:var(--gold);
+  text-shadow:0 0 30px rgba(197,160,89,0.3);
+}
+
+.hero-sub{
+  margin-top:20px;
+  color:var(--muted);
+  text-transform:uppercase;
+  letter-spacing:3px;
+  font-size:16px;
+}
+
+/* ============================
+   PRICING GRID
+   ============================ */
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:0 20px 80px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+  margin-top:40px;
+}
+
+.card{
+  background:#0b0b0b;
+  border:1px solid rgba(255,255,255,0.1);
+  padding:40px 30px;
+  border-radius:14px;
+  transition:.3s;
+}
+
+.card:hover{
+  border-color:var(--gold);
+  transform:translateY(-6px);
+  background:#101010;
+  box-shadow:0 18px 60px rgba(0,0,0,0.7);
+}
+
+.card h3{
+  font-size:26px;
+  color:var(--gold);
+  margin-bottom:10px;
+  text-transform:uppercase;
+}
+
+.price{
+  font-size:40px;
+  font-weight:900;
+  margin-bottom:20px;
+}
+
+.card ul{
+  list-style:none;
+  margin-bottom:30px;
+}
+
+.card li{
+  padding:10px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  color:var(--muted);
+  text-transform:uppercase;
+  font-size:14px;
+}
+
+.btn{
+  width:100%;
+  padding:16px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-bright));
+  color:#000;
+  border:none;
+  border-radius:10px;
+  font-weight:900;
+  letter-spacing:2px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  background:#fff;
+  box-shadow:0 0 20px rgba(255,255,255,0.4);
+}
+
+/* ============================
+   APPLY SECTION
+   ============================ */
+.apply{
+  background:#0a0a0a;
+  border:1px solid var(--gold);
+  padding:60px 30px;
+  border-radius:16px;
+  max-width:800px;
+  margin:0 auto 70px;
+}
+
+.apply h2{
+  text-align:center;
+  font-family:'Montserrat',sans-serif;
+  font-size:36px;
+  margin-bottom:40px;
+}
+
+input{
+  width:100%;
+  padding:18px;
+  margin-bottom:20px;
+  background:#000;
+  border:1px solid #222;
+  color:#fff;
+  border-radius:8px;
+}
+
+input:focus{
+  border-color:var(--gold);
+  outline:none;
+}
+
+.success{
+  text-align:center;
+  color:var(--gold);
+  margin-top:20px;
+  font-weight:700;
+}
+
+/* ============================
+   TESTIMONIALS
+   ============================ */
+.section-title{
+  font-family:'Montserrat',sans-serif;
+  font-size:26px;
+  margin-bottom:20px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+}
+
+.testimonials{
+  max-width:900px;
+  margin:0 auto 60px;
+  padding:0 20px;
+}
+
+.testimonial-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:20px;
+}
+
+.testimonial-card{
+  background:#0b0b0b;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.08);
+  padding:20px 18px;
+  font-size:14px;
+  color:var(--muted);
+}
+
+.testimonial-name{
+  font-weight:700;
+  color:#fff;
+  font-size:13px;
+  margin-top:8px;
+}
+
+.trustpilot-block{
+  margin-top:25px;
+  padding:16px 18px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.08);
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+.trustpilot-btn{
+  background:#00b67a;
+  color:#000;
+  padding:10px 18px;
+  border-radius:999px;
+  font-weight:700;
+  text-decoration:none;
+  font-size:13px;
+  letter-spacing:1px;
+}
+
+/* ============================
+   MARKET CHARTS
+   ============================ */
+.markets{
+  max-width:var(--max-width);
+  margin:0 auto 80px;
+  padding:0 20px;
+}
+
+.markets-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+}
+
+.market-card{
+  background:#0b0b0b;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.08);
+  padding:16px;
+}
+
+.market-card h4{
+  font-size:14px;
+  text-transform:uppercase;
+  letter-spacing:2px;
+  margin-bottom:8px;
+  color:var(--muted);
+}
+
+.chart-frame{
+  width:100%;
+  height:260px;
+  border:none;
+  border-radius:10px;
+  overflow:hidden;
+}
+</style>
 </head>
-<body class="bg-black text-white">
 
-    <!-- Navigation (ακριβώς όπως το είχες) -->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark border-bottom border-warning">
-        <div class="container-fluid px-3 px-lg-5">
-            <a class="navbar-brand d-flex align-items-center me-auto" href="#">
-                <img src="image/Logo.png" alt="Legacy Academy Logo" class="logo-img" style="height: 50px; width: auto;">
-            </a>
-            <button class="navbar-toggler custom-toggler border-2 border-warning" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto align-items-center gap-2">
-                    <li class="nav-item"><a class="nav-link fw-500" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link fw-500" href="#wisdom">Wisdom</a></li>
-                    <li class="nav-item"><a class="nav-link fw-500" href="#academy">Academy</a></li>
-                    <li class="nav-item"><a class="nav-link fw-500" href="#testimonials">Success</a></li>
-                    <li class="nav-item ms-lg-2">
-                        <a class="btn btn-legacy-gold fw-bold px-3 py-2 rounded-pill" href="#packages">JOIN NOW</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<body>
 
-    <!-- Urgency Banner -->
-    <div class="urgency-banner bg-dark text-warning text-center py-2">
-        <span class="urgency-badge">LIMITED TIME</span> Lock in <span class="highlight-gold">$99.99/month</span> before price increase!
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <img src="image/Logo.png" class="logo-img">
+    <ul class="nav-menu">
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="#apply">APPLY</a></li>
+      <li><a href="portfolio.html">PORTFOLIO</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-title">LEGACY <span>ACADEMY</span></div>
+  <div class="hero-sub">STRUCTURED EDUCATION • RISK MANAGEMENT • LONG‑TERM SKILL</div>
+</section>
+
+<!-- PACKAGES -->
+<div class="container">
+  <div class="grid">
+
+    <div class="card">
+      <h3>Starter</h3>
+      <div class="price">€300</div>
+      <ul>
+        <li>1‑on‑1 Strategy Session</li>
+        <li>AI Fundamentals</li>
+        <li>Trading Manual</li>
+      </ul>
+      <button class="btn" onclick="selectPkg('Starter',300)">CLAIM ACCESS</button>
     </div>
 
-    <!-- Hero (από το αρχικό σου) -->
-    <section id="home" class="hero-section min-vh-100 d-flex align-items-center">
-        <div class="container text-center">
-            <h1 class="display-3 fw-black text-white text-uppercase mb-4">LEGACY ACADEMY</h1>
-            <p class="fs-2 fw-bold text-legacy-gold mb-4">BUILD YOUR EMPIRE – FROM ZERO TO LEGEND</p>
-            <p class="fs-5 text-gray-300 mb-5 max-w-3xl mx-auto">
-                Master money-making skills: E-commerce, Crypto, Copywriting, Fitness, AI & more.<br>
-                Join the next generation of winners. $99.99/month – Lock in now.
-            </p>
-            <a href="#packages" class="btn btn-cta btn-lg px-5 py-3">START YOUR LEGACY TODAY</a>
-            <p class="mt-4 text-gray-500">Thousands already building – Don't get left behind.</p>
-        </div>
-    </section>
+    <div class="card" style="border:2px solid var(--gold)">
+      <h3>Professional</h3>
+      <div class="price">€1,250</div>
+      <ul>
+        <li>8‑Week Mentorship</li>
+        <li>Advanced AI Signals</li>
+        <li>Direct Network Access</li>
+      </ul>
+      <button class="btn" onclick="selectPkg('Professional',1250)">CLAIM ACCESS</button>
+    </div>
 
-    <!-- Wisdom Section -->
-    <section id="wisdom" class="py-5 bg-gray-900">
-        <div class="container px-4">
-            <h2 class="text-5xl font-black text-center mb-5 text-legacy-gold uppercase">LEGACY WISDOM</h2>
-            <div class="row g-4">
-                <div class="col-md-4 text-center" data-aos="fade-up">
-                    <img src="https://via.placeholder.com/400x300?text=Tenets+of+Success" alt="Tenets" class="img-fluid rounded mb-3">
-                    <h3 class="text-3xl font-bold mb-3">TENETS OF SUCCESS</h3>
-                    <p>Unbreakable rules to dominate life.</p>
-                </div>
-                <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://via.placeholder.com/400x300?text=Empire+Tales" alt="Tales" class="img-fluid rounded mb-3">
-                    <h3 class="text-3xl font-bold mb-3">EMPIRE TALES</h3>
-                    <p>Wisdom for modern leaders.</p>
-                </div>
-                <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://via.placeholder.com/400x300?text=Young+Legends" alt="Young Legends" class="img-fluid rounded mb-3">
-                    <h3 class="text-3xl font-bold mb-3">YOUNG LEGENDS</h3>
-                    <p>Build from zero to hero.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="card">
+      <h3>Elite</h3>
+      <div class="price">€6,250</div>
+      <ul>
+        <li>Lifetime Mastermind</li>
+        <li>Custom AI Algo</li>
+        <li>Founder Audit</li>
+      </ul>
+      <button class="btn" onclick="selectPkg('Elite',6250)">CLAIM ACCESS</button>
+    </div>
 
-    <!-- Academy Section -->
-    <section id="academy" class="py-5 bg-black">
-        <div class="container text-center px-4">
-            <h2 class="text-5xl font-black mb-4 text-legacy-gold uppercase">LEGACY CAMPUSES</h2>
-            <p class="lead mb-5">Choose your path to wealth:</p>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-4" data-aos="fade-up">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <h3 class="text-2xl font-bold mb-3">E-COMMERCE</h3>
-                        <p>Master online sales and scale your business.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <h3 class="text-2xl font-bold mb-3">CRYPTO</h3>
-                        <p>Build your portfolio and trade like a pro.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <h3 class="text-2xl font-bold mb-3">COPYWRITING</h3>
-                        <p>Write words that sell and earn big.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <h3 class="text-2xl font-bold mb-3 text-legacy-gold">AI AGENCY</h3>
-                        <p>Build automated AI businesses.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <h3 class="text-2xl font-bold mb-3 text-legacy-gold">CONTENT CREATION</h3>
-                        <p>Monetize your social media empire.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  </div>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-5 bg-gray-900">
-        <div class="container px-4">
-            <h2 class="text-5xl font-black text-center mb-5 text-legacy-gold uppercase">OUR STUDENTS WINNING</h2>
-            <div class="row g-4">
-                <div class="col-md-4" data-aos="fade-up">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <p class="mb-3">"From consistent losses to profitable months. Risk management and psychology fixed – real results."</p>
-                        <p class="text-legacy-gold fw-bold">– Alex, Germany</p>
-                        <small class="text-gray-500">(Pro Package)</small>
-                    </div>
-                </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <p class="mb-3">"Starter fixed LinkedIn + basics. Upgraded to Pro – worth it."</p>
-                        <p class="text-legacy-gold fw-bold">– Marco, UK</p>
-                        <small class="text-gray-500">(Starter → Pro)</small>
-                    </div>
-                </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
-                        <p class="mb-3">"Turned my portfolio around in 6 weeks. The AI tools alone saved me thousands in bad trades."</p>
-                        <p class="text-legacy-gold fw-bold">– Sophie, Germany</p>
-                        <small class="text-gray-500">(Elite Package)</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- APPLY -->
+  <div class="apply" id="apply">
+    <h2>ENTER THE ACADEMY</h2>
+    <form id="form">
+      <input type="text" id="name" placeholder="FULL NAME" required>
+      <input type="email" id="email" placeholder="EMAIL" required>
+      <input type="tel" id="phone" placeholder="WHATSAPP NUMBER" required>
+      <input type="text" id="package" placeholder="SELECTED PACKAGE" readonly>
 
-    <!-- Trading Mastery Hero + Packages + Form (το κομμάτι σου) -->
-    <section id="trading" class="py-5 bg-black">
-        <div class="container">
-            <!-- Το δικό σου hero + packages + form -->
-            <div class="hero">
-                <h1>Accelerate Your Trading Mastery</h1>
-                <p>Elite 1-on-1 coaching with AI-powered tools, investment strategies, education modules, and more — elevate your skills today.</p>
-                <button class="btn" id="ctaBtn">APPLY NOW</button>
-            </div>
+      <button class="btn" type="submit">SUBMIT APPLICATION</button>
+      <div class="success" id="success"></div>
+    </form>
+  </div>
+</div>
 
-            <div class="packages mt-5">
-                <div class="package">
-                    <h3>Starter Package</h3>
-                    <ul>
-                        <li>Intensive 1-on-1 session</li>
-                        <li>CV & LinkedIn optimization</li>
-                        <li>Trading fundamentals deep-dive</li>
-                        <li>AI-powered interactive lessons</li>
-                        <li>Basic investment strategies</li>
-                        <li>Custom charts & diagrams</li>
-                        <li>Video tutorials + simulations</li>
-                    </ul>
-                    <div class="price">
-                        <span class="original-price">2.000 EUR</span>
-                        99.99 EUR
-                        <span class="discount-pill">75% OFF</span>
-                    </div>
-                    <button class="package-btn" data-package="Starter" data-value="99.99">Select Starter</button>
-                </div>
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <h3 class="section-title">What Students Say</h3>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      “From consistent losses to profitable months. Risk management and psychology fixed – real results.”
+      <div class="testimonial-name">– Alex, Germany (Professional)</div>
+    </div>
+    <div class="testimonial-card">
+      “Starter fixed LinkedIn + basics. Upgraded to Professional – worth it.”
+      <div class="testimonial-name">– Marco, UK (Starter)</div>
+    </div>
+  </div>
 
-                <div class="package">
-                    <h3>Pro Package</h3>
-                    <ul>
-                        <li>8-week structured mentoring</li>
-                        <li>Advanced strategy breakdowns</li>
-                        <li>Ongoing support & resources</li>
-                        <li>AI-personalized learning paths</li>
-                        <li>Interactive market diagrams</li>
-                        <li>Backtesting tools + webinars</li>
-                        <li>AI-driven investment analysis</li>
-                        <li>Educational e-books on trading</li>
-                    </ul>
-                    <div class="price">
-                        <span class="original-price">5.000 EUR</span>
-                        1.250 EUR
-                        <span class="discount-pill">75% OFF</span>
-                    </div>
-                    <button class="package-btn" data-package="Pro" data-value="1250">Select Pro</button>
-                </div>
+  <div class="trustpilot-block">
+    <span>Independent feedback available on Trustpilot.</span>
+    <a class="trustpilot-btn" href="https://www.trustpilot.com/review/legacyacademy.store" target="_blank">View Reviews</a>
+  </div>
+</section>
 
-                <div class="package">
-                    <h3>Premium Package</h3>
-                    <ul>
-                        <li>Elite unlimited 1-on-1 coaching</li>
-                        <li>Fully custom trading roadmap</li>
-                        <li>Exclusive private community</li>
-                        <li>Priority 24/7 support</li>
-                        <li>Advanced AI education modules</li>
-                        <li>Case studies + predictive tools</li>
-                        <li>Simulations, e-books, live sessions</li>
-                        <li>AI investment portfolio optimization</li>
-                        <li>Personalized risk management training</li>
-                    </ul>
-                    <div class="price">
-                        <span class="original-price">10.000 EUR</span>
-                        2.500 EUR
-                        <span class="discount-pill">75% OFF</span>
-                    </div>
-                    <button class="package-btn" data-package="Premium" data-value="2500">Select Premium</button>
-                </div>
+<!-- MARKETS -->
+<section class="markets">
+  <h3 class="section-title">Market View</h3>
+  <div class="markets-grid">
+    <div class="market-card">
+      <h4>Gold (XAUUSD)</h4>
+      <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=60&theme=dark"></iframe>
+    </div>
+    <div class="market-card">
+      <h4>Silver (XAGUSD)</h4>
+      <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAGUSD&interval=60&theme=dark"></iframe>
+    </div>
+    <div class="market-card">
+      <h4>Bitcoin (BTCUSDT)</h4>
+      <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=dark"></iframe>
+    </div>
+  </div>
+</section>
 
-                <div class="package">
-                    <h3>Elite Package</h3>
-                    <ul>
-                        <li>Lifetime access to all updates</li>
-                        <li>VIP 1-on-1 coaching (no limits)</li>
-                        <li>Personal AI trading assistant setup</li>
-                        <li>Real-time trade alerts & reviews</li>
-                        <li>Custom algorithmic strategy development</li>
-                        <li>Exclusive mastermind group access</li>
-                        <li>Annual in-person / virtual retreat</li>
-                        <li>Direct founder mentorship sessions</li>
-                        <li>Full portfolio audit + optimization</li>
-                    </ul>
-                    <div class="price">
-                        <span class="original-price">25.000 EUR</span>
-                        6.250 EUR
-                        <span class="discount-pill">75% OFF</span>
-                    </div>
-                    <button class="package-btn" data-package="Elite" data-value="6250">Select Elite</button>
-                </div>
-            </div>
+<script>
+function selectPkg(name, price){
+  document.getElementById("package").value = name + " — €" + price;
+  document.getElementById("apply").scrollIntoView({behavior:"smooth"});
+}
 
-            <p class="supported mt-5">Serving clients in Germany, Greece, and the United Kingdom.</p>
+document.getElementById("form").addEventListener("submit", e=>{
+  e.preventDefault();
+  document.getElementById("success").innerText = "APPLICATION RECEIVED — CHECK YOUR EMAIL";
+});
+</script>
 
-            <!-- Το form σου -->
-            <div class="form-section mt-5" id="formSection">
-                <h2>Submit Your Application</h2>
-                <form id="applyForm">
-                    <input type="text" name="name" placeholder="Full Name" required/>
-                    <input type="email" name="email" placeholder="Email Address" required/>
-                    <input type="tel" name="phone" placeholder="Phone Number" required/>
-                    <input type="number" id="investment" name="investment" placeholder="Investment Amount (EUR)" min="0" step="10"/>
-                    <input type="hidden" id="selectedPackage" name="package"/>
-                    <div class="submit-wrapper">
-                        <button type="submit" class="submit-btn" id="submitBtn">SEND APPLICATION</button>
-                    </div>
-                    <div id="successMsg" class="success-msg"></div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 py-4 text-center">
-        <div class="container">
-            <p class="mb-1">© 2026 Legacy Academy. All rights reserved.</p>
-            <p class="text-gray-500 small">Serving clients in Germany, Greece, United Kingdom</p>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 800, once: true });
-    </script>
-
-    <!-- Το script σου για EmailJS + package selection -->
-    <script>
-        // Αντικατέστησε με το ΔΙΚΟ ΣΟΥ Public Key !!!
-        emailjs.init("49oIc0IIO21wWTa5p");  // ← ΒΑΛΕ ΤΟ ΔΙΚΟ ΣΟΥ ΕΔΩ!
-
-        const serviceID = "service_3pbi8oj";
-        const templateID = "template_tnphm2l";
-
-        const form = document.getElementById('applyForm');
-        const msg = document.getElementById('successMsg');
-        const btn = document.getElementById('submitBtn');
-        const pkgBtns = document.querySelectorAll('.package-btn');
-        const pkgInput = document.getElementById('selectedPackage');
-        const investmentInput = document.getElementById('investment');
-
-        pkgBtns.forEach(b => {
-            b.addEventListener('click', () => {
-                pkgBtns.forEach(x => x.classList.remove('selected'));
-                b.classList.add('selected');
-                pkgInput.value = b.dataset.package;
-                investmentInput.value = b.dataset.value || '';
-                document.getElementById('formSection').scrollIntoView({behavior: 'smooth'});
-            });
-        });
-
-        document.getElementById('ctaBtn')?.addEventListener('click', () => {
-            document.getElementById('formSection').scrollIntoView({behavior: 'smooth'});
-        });
-
-        form.addEventListener('submit', async e => {
-            e.preventDefault();
-            if (!form.name.value.trim() || !form.email.value.trim() || !form.phone.value.trim()) {
-                msg.textContent = "Please fill in Name, Email and Phone";
-                msg.className = "success-msg error";
-                return;
-            }
-            btn.textContent = "SENDING...";
-            btn.disabled = true;
-            msg.textContent = "";
-            msg.className = "success-msg";
-
-            const params = {
-                name: form.name.value.trim(),
-                email: form.email.value.trim(),
-                phone: form.phone.value.trim(),
-                investment: investmentInput.value ? investmentInput.value + " EUR" : "—",
-                package: pkgInput.value || "Not selected",
-                reply_to: form.email.value.trim()
-            };
-
-            try {
-                await emailjs.send(serviceID, templateID, params);
-                msg.textContent = "Application sent successfully! We'll contact you soon.";
-                msg.className = "success-msg success";
-                form.reset();
-                investmentInput.value = "";
-                pkgBtns.forEach(b => b.classList.remove('selected'));
-                pkgInput.value = "";
-            } catch (err) {
-                console.error("EmailJS Error:", err);
-                msg.textContent = "Failed to send: " + (err.text || "Check console (F12)");
-                msg.className = "success-msg error";
-            } finally {
-                btn.textContent = "SEND APPLICATION";
-                btn.disabled = false;
-            }
-        });
-    </script>
 </body>
 </html>
