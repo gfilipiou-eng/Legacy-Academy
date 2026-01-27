@@ -4,26 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Legacy Academy – Build Your Empire</title>
+
+    <!-- Bootstrap & AOS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- EmailJS -->
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- Το δικό σου CSS (ακριβώς όπως το έστειλες) -->
+    <style>
+        :root {
+            --bg: #080808;
+            --card: #111111;
+            --text: #f5f5f5;
+            --light: #bbbbbb;
+            --accent: #d4b36a;
+            --accent-dark: #b89a50;
+            --border: #2a2a2a;
+            --input-bg: #161616;
+            --discount-bg: #ff4d4d;
+            --discount-text: #fff;
+        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            font-size: clamp(14px, 4vw, 16px);
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 15px; }
+        .hero {
+            background: linear-gradient(135deg, #161616, #0c0c0c);
+            border-radius: 14px;
+            padding: clamp(40px, 10vw, 60px) clamp(15px, 5vw, 20px);
+            margin: clamp(20px, 5vw, 25px) 0 clamp(40px, 10vw, 50px);
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+        .hero h1 { color: var(--accent); font-size: clamp(28px, 7vw, 42px); font-weight: 700; margin-bottom: 16px; }
+        .hero p { color: var(--light); max-width: 640px; margin: 0 auto 24px; font-size: clamp(14px, 4vw, 16px); }
+        .btn {
+            background: var(--accent);
+            color: #000;
+            font-weight: 600;
+            padding: clamp(12px, 4vw, 16px) clamp(30px, 8vw, 40px);
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: clamp(14px, 4vw, 16px);
+        }
+        .btn:hover { background: var(--accent-dark); }
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: clamp(16px, 4vw, 24px);
+            margin: clamp(30px, 8vw, 40px) 0;
+        }
+        .package {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: clamp(24px, 6vw, 32px) clamp(15px, 5vw, 20px);
+            text-align: center;
+        }
+        .package h3 { color: var(--accent); font-size: clamp(20px, 5vw, 24px); margin-bottom: clamp(16px, 4vw, 20px); }
+        .package ul { list-style: none; padding: 0; margin: clamp(16px, 4vw, 20px) 0; text-align: left; }
+        .package li { margin: clamp(8px, 2vw, 10px) 0; color: var(--light); font-size: clamp(13px, 3.5vw, 15px); }
+        .price {
+            font-size: clamp(28px, 7vw, 32px);
+            font-weight: 700;
+            color: var(--text);
+            margin: clamp(20px, 5vw, 24px) 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .original-price { font-size: clamp(20px, 5vw, 24px); text-decoration: line-through; color: var(--light); }
+        .discount-pill {
+            background: var(--discount-bg);
+            color: var(--discount-text);
+            font-weight: 600;
+            padding: clamp(6px, 1.5vw, 8px) clamp(15px, 4vw, 20px);
+            border-radius: 50px;
+            font-size: clamp(12px, 3vw, 14px);
+        }
+        .package-btn {
+            width: 100%;
+            padding: clamp(10px, 3vw, 14px);
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: clamp(13px, 3.5vw, 15px);
+        }
+        .package-btn:hover { background: var(--accent-dark); }
+        .package-btn.selected {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        .supported {
+            text-align: center;
+            color: var(--light);
+            margin: clamp(30px, 8vw, 40px) 0;
+            font-size: clamp(13px, 3.5vw, 15px);
+        }
+        .form-section {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: clamp(30px, 8vw, 40px) clamp(20px, 5vw, 25px);
+            max-width: 680px;
+            margin: 0 auto clamp(60px, 15vw, 80px);
+        }
+        .form-section h2 { color: var(--accent); text-align: center; margin-bottom: clamp(24px, 6vw, 32px); font-size: clamp(24px, 6vw, 28px); }
+        input {
+            width: 100%;
+            height: clamp(48px, 12vw, 54px);
+            padding: 0 clamp(15px, 4vw, 20px);
+            margin: clamp(10px, 2.5vw, 12px) 0;
+            border: 1px solid #333;
+            border-radius: 50px;
+            background: var(--input-bg);
+            color: #eee;
+            font-size: clamp(13px, 3.5vw, 15px);
+        }
+        input:focus { outline: none; border-color: var(--accent); }
+        input::placeholder { color: #777; }
+        .submit-wrapper { text-align: center; margin: clamp(24px, 6vw, 32px) 0; }
+        .submit-btn {
+            padding: clamp(14px, 4vw, 18px) clamp(40px, 10vw, 60px);
+            font-size: clamp(15px, 4vw, 17px);
+            background: var(--accent);
+            color: #000;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+        }
+        .submit-btn:hover { background: var(--accent-dark); }
+        .success-msg {
+            margin-top: clamp(16px, 4vw, 20px);
+            text-align: center;
+            padding: clamp(10px, 3vw, 14px);
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: clamp(13px, 3.5vw, 15px);
+        }
+        .success { background: rgba(100,220,140,0.15); color: #7f7; }
+        .error { background: rgba(255,100,100,0.15); color: #f77; }
+    </style>
 </head>
 <body class="bg-black text-white">
 
-    <!-- Navigation -->
+    <!-- Navigation (ακριβώς όπως το είχες) -->
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark border-bottom border-warning">
         <div class="container-fluid px-3 px-lg-5">
             <a class="navbar-brand d-flex align-items-center me-auto" href="#">
-                <img src="logo.png" alt="Legacy Academy Logo" class="logo-img">
+                <img src="image/Logo.png" alt="Legacy Academy Logo" class="logo-img" style="height: 50px; width: auto;">
             </a>
-
             <button class="navbar-toggler custom-toggler border-2 border-warning" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center gap-2">
                     <li class="nav-item"><a class="nav-link fw-500" href="#home">Home</a></li>
@@ -39,11 +194,11 @@
     </nav>
 
     <!-- Urgency Banner -->
-    <div class="urgency-banner">
+    <div class="urgency-banner bg-dark text-warning text-center py-2">
         <span class="urgency-badge">LIMITED TIME</span> Lock in <span class="highlight-gold">$99.99/month</span> before price increase!
     </div>
 
-    <!-- Hero -->
+    <!-- Hero (από το αρχικό σου) -->
     <section id="home" class="hero-section min-vh-100 d-flex align-items-center">
         <div class="container text-center">
             <h1 class="display-3 fw-black text-white text-uppercase mb-4">LEGACY ACADEMY</h1>
@@ -58,94 +213,111 @@
     </section>
 
     <!-- Wisdom Section -->
-    <section id="wisdom" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black text-center mb-16 text-legacy-gold uppercase">LEGACY WISDOM</h2>
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="text-center" data-aos="zoom-in">
-                    <img src="https://via.placeholder.com/400x300?text=Tenets+of+Success" alt="Tenets" class="rounded-2xl mb-6 mx-auto">
-                    <h3 class="text-3xl font-bold mb-4">TENETS OF SUCCESS</h3>
+    <section id="wisdom" class="py-5 bg-gray-900">
+        <div class="container px-4">
+            <h2 class="text-5xl font-black text-center mb-5 text-legacy-gold uppercase">LEGACY WISDOM</h2>
+            <div class="row g-4">
+                <div class="col-md-4 text-center" data-aos="fade-up">
+                    <img src="https://via.placeholder.com/400x300?text=Tenets+of+Success" alt="Tenets" class="img-fluid rounded mb-3">
+                    <h3 class="text-3xl font-bold mb-3">TENETS OF SUCCESS</h3>
                     <p>Unbreakable rules to dominate life.</p>
                 </div>
-                <div class="text-center" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="https://via.placeholder.com/400x300?text=Empire+Tales" alt="Tales" class="rounded-2xl mb-6 mx-auto">
-                    <h3 class="text-3xl font-bold mb-4">EMPIRE TALES</h3>
+                <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://via.placeholder.com/400x300?text=Empire+Tales" alt="Tales" class="img-fluid rounded mb-3">
+                    <h3 class="text-3xl font-bold mb-3">EMPIRE TALES</h3>
                     <p>Wisdom for modern leaders.</p>
                 </div>
-                <div class="text-center" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="https://via.placeholder.com/400x300?text=Young+Legends" alt="Young Legends" class="rounded-2xl mb-6 mx-auto">
-                    <h3 class="text-3xl font-bold mb-4">YOUNG LEGENDS</h3>
+                <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://via.placeholder.com/400x300?text=Young+Legends" alt="Young Legends" class="img-fluid rounded mb-3">
+                    <h3 class="text-3xl font-bold mb-3">YOUNG LEGENDS</h3>
                     <p>Build from zero to hero.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Academy Section (Campuses) -->
-    <section id="academy" class="py-20 bg-black">
-        <div class="container mx-auto px-6 text-center" data-aos="fade-right">
-            <h2 class="text-6xl font-black mb-8 text-legacy-gold uppercase">LEGACY CAMPUSES</h2>
-            <p class="text-2xl mb-12 max-w-3xl mx-auto">Choose your path to wealth:</p>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up">
-                    <h3 class="text-3xl font-bold mb-4">E-COMMERCE</h3>
-                    <p>Master online sales and scale your business.</p>
+    <!-- Academy Section -->
+    <section id="academy" class="py-5 bg-black">
+        <div class="container text-center px-4">
+            <h2 class="text-5xl font-black mb-4 text-legacy-gold uppercase">LEGACY CAMPUSES</h2>
+            <p class="lead mb-5">Choose your path to wealth:</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4" data-aos="fade-up">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-3">E-COMMERCE</h3>
+                        <p>Master online sales and scale your business.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="text-3xl font-bold mb-4">CRYPTO</h3>
-                    <p>Build your portfolio and trade like a pro.</p>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-3">CRYPTO</h3>
+                        <p>Build your portfolio and trade like a pro.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="text-3xl font-bold mb-4">COPYWRITING</h3>
-                    <p>Write words that sell and earn big.</p>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-3">COPYWRITING</h3>
+                        <p>Write words that sell and earn big.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="300">
-                    <h3 class="text-3xl font-bold mb-4 text-legacy-gold">AI AGENCY</h3>
-                    <p>Build automated AI businesses.</p>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-3 text-legacy-gold">AI AGENCY</h3>
+                        <p>Build automated AI businesses.</p>
+                    </div>
                 </div>
-                <div class="bg-gray-900 p-8 rounded-2xl border border-gray-800" data-aos="fade-up" data-aos-delay="400">
-                    <h3 class="text-3xl font-bold mb-4 text-legacy-gold">CONTENT CREATION</h3>
-                    <p>Monetize your social media empire.</p>
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <h3 class="text-2xl font-bold mb-3 text-legacy-gold">CONTENT CREATION</h3>
+                        <p>Monetize your social media empire.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 bg-gray-900">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-black text-center mb-16 text-legacy-gold uppercase">OUR STUDENTS WINNING</h2>
-            <div class="grid md:grid-cols-3 gap-12">
-                <div class="bg-gray-900 p-8 rounded-2xl border border-legacy-gold/30 testimonial-card" data-aos="fade-up">
-                    <p class="text-xl mb-4 leading-relaxed text-white">"From consistent losses to profitable months. Risk management and psychology fixed – real results."</p>
-                    <p class="text-legacy-gold font-bold">– Alex, Germany</p>
-                    <p class="text-gray-400 text-sm mt-1">(Pro Package)</p>
+    <section id="testimonials" class="py-5 bg-gray-900">
+        <div class="container px-4">
+            <h2 class="text-5xl font-black text-center mb-5 text-legacy-gold uppercase">OUR STUDENTS WINNING</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <p class="mb-3">"From consistent losses to profitable months. Risk management and psychology fixed – real results."</p>
+                        <p class="text-legacy-gold fw-bold">– Alex, Germany</p>
+                        <small class="text-gray-500">(Pro Package)</small>
+                    </div>
                 </div>
-                <div class="bg-gray-900 p-8 rounded-2xl border border-legacy-gold/30 testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                    <p class="text-xl mb-4 leading-relaxed text-white">"Starter fixed LinkedIn + basics. Upgraded to Pro – worth it."</p>
-                    <p class="text-legacy-gold font-bold">– Marco, UK</p>
-                    <p class="text-gray-400 text-sm mt-1">(Starter → Pro)</p>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <p class="mb-3">"Starter fixed LinkedIn + basics. Upgraded to Pro – worth it."</p>
+                        <p class="text-legacy-gold fw-bold">– Marco, UK</p>
+                        <small class="text-gray-500">(Starter → Pro)</small>
+                    </div>
                 </div>
-                <div class="bg-gray-900 p-8 rounded-2xl border border-legacy-gold/30 testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                    <p class="text-xl mb-4 leading-relaxed text-white">"Turned my portfolio around in 6 weeks. The AI tools alone saved me thousands in bad trades."</p>
-                    <p class="text-legacy-gold font-bold">– Sophie, Germany</p>
-                    <p class="text-gray-400 text-sm mt-1">(Elite Package)</p>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-gray-900 p-4 rounded border border-gray-700">
+                        <p class="mb-3">"Turned my portfolio around in 6 weeks. The AI tools alone saved me thousands in bad trades."</p>
+                        <p class="text-legacy-gold fw-bold">– Sophie, Germany</p>
+                        <small class="text-gray-500">(Elite Package)</small>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Trading Packages Section -->
-    <section id="packages" class="py-20 bg-black">
-        <div class="container mx-auto px-6">
-            <div class="trading-hero">
-                <h1 class="text-legacy-gold">Accelerate Your Trading Mastery</h1>
+    <!-- Trading Mastery Hero + Packages + Form (το κομμάτι σου) -->
+    <section id="trading" class="py-5 bg-black">
+        <div class="container">
+            <!-- Το δικό σου hero + packages + form -->
+            <div class="hero">
+                <h1>Accelerate Your Trading Mastery</h1>
                 <p>Elite 1-on-1 coaching with AI-powered tools, investment strategies, education modules, and more — elevate your skills today.</p>
-                <button class="btn-cta" id="ctaBtn">APPLY NOW</button>
+                <button class="btn" id="ctaBtn">APPLY NOW</button>
             </div>
 
-            <div class="packages-grid">
-                <div class="package-card">
+            <div class="packages mt-5">
+                <div class="package">
                     <h3>Starter Package</h3>
                     <ul>
                         <li>Intensive 1-on-1 session</li>
@@ -156,15 +328,15 @@
                         <li>Custom charts & diagrams</li>
                         <li>Video tutorials + simulations</li>
                     </ul>
-                    <div class="package-price">
+                    <div class="price">
                         <span class="original-price">2.000 EUR</span>
-                        <span>99.99 EUR</span>
+                        99.99 EUR
                         <span class="discount-pill">75% OFF</span>
                     </div>
                     <button class="package-btn" data-package="Starter" data-value="99.99">Select Starter</button>
                 </div>
 
-                <div class="package-card">
+                <div class="package">
                     <h3>Pro Package</h3>
                     <ul>
                         <li>8-week structured mentoring</li>
@@ -176,15 +348,15 @@
                         <li>AI-driven investment analysis</li>
                         <li>Educational e-books on trading</li>
                     </ul>
-                    <div class="package-price">
+                    <div class="price">
                         <span class="original-price">5.000 EUR</span>
-                        <span>1.250 EUR</span>
+                        1.250 EUR
                         <span class="discount-pill">75% OFF</span>
                     </div>
                     <button class="package-btn" data-package="Pro" data-value="1250">Select Pro</button>
                 </div>
 
-                <div class="package-card">
+                <div class="package">
                     <h3>Premium Package</h3>
                     <ul>
                         <li>Elite unlimited 1-on-1 coaching</li>
@@ -197,15 +369,15 @@
                         <li>AI investment portfolio optimization</li>
                         <li>Personalized risk management training</li>
                     </ul>
-                    <div class="package-price">
+                    <div class="price">
                         <span class="original-price">10.000 EUR</span>
-                        <span>2.500 EUR</span>
+                        2.500 EUR
                         <span class="discount-pill">75% OFF</span>
                     </div>
                     <button class="package-btn" data-package="Premium" data-value="2500">Select Premium</button>
                 </div>
 
-                <div class="package-card">
+                <div class="package">
                     <h3>Elite Package</h3>
                     <ul>
                         <li>Lifetime access to all updates</li>
@@ -218,18 +390,19 @@
                         <li>Direct founder mentorship sessions</li>
                         <li>Full portfolio audit + optimization</li>
                     </ul>
-                    <div class="package-price">
+                    <div class="price">
                         <span class="original-price">25.000 EUR</span>
-                        <span>6.250 EUR</span>
+                        6.250 EUR
                         <span class="discount-pill">75% OFF</span>
                     </div>
                     <button class="package-btn" data-package="Elite" data-value="6250">Select Elite</button>
                 </div>
             </div>
 
-            <p class="supported-text">Serving clients in Germany, Greece, and the United Kingdom.</p>
+            <p class="supported mt-5">Serving clients in Germany, Greece, and the United Kingdom.</p>
 
-            <div class="form-section" id="formSection">
+            <!-- Το form σου -->
+            <div class="form-section mt-5" id="formSection">
                 <h2>Submit Your Application</h2>
                 <form id="applyForm">
                     <input type="text" name="name" placeholder="Full Name" required/>
@@ -246,26 +419,11 @@
         </div>
     </section>
 
-    <!-- Join Section -->
-    <section id="join" class="py-20 bg-black text-center">
-        <div class="container mx-auto px-6" data-aos="fade-up">
-            <h2 class="text-6xl font-black mb-8 text-legacy-gold uppercase">JOIN LEGACY ACADEMY</h2>
-            <p class="text-4xl mb-8 font-black text-legacy-gold">$99.99 / month – FOREVER (Lock in before increase!)</p>
-            <div class="bg-red-900 text-white py-4 px-6 rounded-xl mb-8 max-w-2xl mx-auto">
-                <p class="text-xl font-bold">98% SOLD OUT – Price increase imminent in 2026. Join now or miss out forever.</p>
-            </div>
-            <a href="#" class="bg-legacy-gold text-white text-3xl font-extrabold px-20 py-10 rounded-full hover:bg-yellow-400 transition transform hover:scale-110">
-                JOIN NOW & START WINNING
-            </a>
-            <p class="mt-8 text-gray-500">Price locked – Act fast before increase.</p>
-        </div>
-    </section>
-
     <!-- Footer -->
-    <footer class="bg-gray-900 py-12 border-t border-gray-800">
-        <div class="container mx-auto px-6 text-center">
-            <p class="text-2xl mb-4 font-bold text-legacy-gold uppercase"></p>
-            <p class="text-gray-400">&copy; 2026 Legacy Academy. Build Your Future.</p>
+    <footer class="bg-gray-900 py-4 text-center">
+        <div class="container">
+            <p class="mb-1">© 2026 Legacy Academy. All rights reserved.</p>
+            <p class="text-gray-500 small">Serving clients in Germany, Greece, United Kingdom</p>
         </div>
     </footer>
 
@@ -273,8 +431,76 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200 });
+        AOS.init({ duration: 800, once: true });
     </script>
-    <script src="script.js"></script>
+
+    <!-- Το script σου για EmailJS + package selection -->
+    <script>
+        // Αντικατέστησε με το ΔΙΚΟ ΣΟΥ Public Key !!!
+        emailjs.init("49oIc0IIO21wWTa5p");  // ← ΒΑΛΕ ΤΟ ΔΙΚΟ ΣΟΥ ΕΔΩ!
+
+        const serviceID = "service_3pbi8oj";
+        const templateID = "template_tnphm2l";
+
+        const form = document.getElementById('applyForm');
+        const msg = document.getElementById('successMsg');
+        const btn = document.getElementById('submitBtn');
+        const pkgBtns = document.querySelectorAll('.package-btn');
+        const pkgInput = document.getElementById('selectedPackage');
+        const investmentInput = document.getElementById('investment');
+
+        pkgBtns.forEach(b => {
+            b.addEventListener('click', () => {
+                pkgBtns.forEach(x => x.classList.remove('selected'));
+                b.classList.add('selected');
+                pkgInput.value = b.dataset.package;
+                investmentInput.value = b.dataset.value || '';
+                document.getElementById('formSection').scrollIntoView({behavior: 'smooth'});
+            });
+        });
+
+        document.getElementById('ctaBtn')?.addEventListener('click', () => {
+            document.getElementById('formSection').scrollIntoView({behavior: 'smooth'});
+        });
+
+        form.addEventListener('submit', async e => {
+            e.preventDefault();
+            if (!form.name.value.trim() || !form.email.value.trim() || !form.phone.value.trim()) {
+                msg.textContent = "Please fill in Name, Email and Phone";
+                msg.className = "success-msg error";
+                return;
+            }
+            btn.textContent = "SENDING...";
+            btn.disabled = true;
+            msg.textContent = "";
+            msg.className = "success-msg";
+
+            const params = {
+                name: form.name.value.trim(),
+                email: form.email.value.trim(),
+                phone: form.phone.value.trim(),
+                investment: investmentInput.value ? investmentInput.value + " EUR" : "—",
+                package: pkgInput.value || "Not selected",
+                reply_to: form.email.value.trim()
+            };
+
+            try {
+                await emailjs.send(serviceID, templateID, params);
+                msg.textContent = "Application sent successfully! We'll contact you soon.";
+                msg.className = "success-msg success";
+                form.reset();
+                investmentInput.value = "";
+                pkgBtns.forEach(b => b.classList.remove('selected'));
+                pkgInput.value = "";
+            } catch (err) {
+                console.error("EmailJS Error:", err);
+                msg.textContent = "Failed to send: " + (err.text || "Check console (F12)");
+                msg.className = "success-msg error";
+            } finally {
+                btn.textContent = "SEND APPLICATION";
+                btn.disabled = false;
+            }
+        });
+    </script>
 </body>
 </html>
