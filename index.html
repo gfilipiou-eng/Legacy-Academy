@@ -1,499 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEGACY ACADEMY — BEYOND THE MATRIX</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEGACY ACADEMY — BEYOND THE MATRIX</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           LEGACY ACADEMY — PREMIUM DESIGN (2026)
+           ============================================ */
 
-<style>
-/* ============================================
-   LEGACY ACADEMY — INDEX PAGE CSS (2026)
-   ============================================ */
+        :root {
+            --gold: #c5a059;
+            --gold-glow: rgba(197, 160, 89, 0.4);
+            --gold-bright: #f1d592;
+            --bg: #050505;
+            --card-bg: rgba(15, 15, 15, 0.6);
+            --border: rgba(255, 255, 255, 0.08);
+            --font-main: 'Inter', sans-serif;
+            --font-title: 'Montserrat', sans-serif;
+        }
 
-:root{
-  --gold:#c5a059;
-  --gold-bright:#f1d592;
-  --muted:#bdbdbd;
-  --bg:#000;
-  --card:#0b0b0b;
-  --nav-h:84px;
-  --max-width:1250px;
-  --font:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
-}
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
+        
+        html { scroll-behavior: smooth; }
 
-/* RESET */
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  background:#000;
-  color:#fff;
-  font-family:var(--font);
-  overflow-x:hidden;
-  padding-top:var(--nav-h);
-  line-height:1.4;
-}
+        body {
+            background-color: var(--bg);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(197, 160, 89, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(197, 160, 89, 0.05) 0%, transparent 40%);
+            color: #fff;
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-/* ============================
-   NAVBAR
-   ============================ */
-nav{
-  position:fixed;
-  top:0;left:0;right:0;
-  height:var(--nav-h);
-  background:rgba(0,0,0,0.75);
-  backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,0.1);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:9999;
-}
+        /* ============================
+           NAVBAR
+           ============================ */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 90px;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            z-index: 10000;
+        }
 
-.nav-inner{
-  width:100%;
-  max-width:var(--max-width);
-  padding:0 24px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
+        .nav-inner {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-.logo-img{
-  height:60px;
-  filter:drop-shadow(0 0 10px rgba(197,160,89,0.4));
-}
+        .logo-img { height: 50px; }
 
-/* MENU */
-.nav-menu{
-  list-style:none;
-  display:flex;
-  gap:36px;
-}
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
 
-.nav-menu a{
-  color:#fff;
-  text-decoration:none;
-  font-family:'Montserrat',sans-serif;
-  font-weight:700;
-  letter-spacing:1.5px;
-  font-size:15px;
-  position:relative;
-}
+        .nav-menu a {
+            color: #fff;
+            text-decoration: none;
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            transition: 0.3s;
+            opacity: 0.8;
+        }
 
-.nav-menu a::after{
-  content:"";
-  position:absolute;
-  bottom:-6px;
-  left:0;
-  width:0;
-  height:2px;
-  background:var(--gold);
-  transition:.3s;
-}
+        .nav-menu a:hover { opacity: 1; color: var(--gold); }
 
-.nav-menu a:hover::after{
-  width:100%;
-}
+        /* ============================
+           HERO
+           ============================ */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 140px 20px 60px;
+        }
 
-/* MOBILE NAV */
-@media(max-width:850px){
-  nav{
-    height:auto;
-    padding:16px 0;
-  }
-  .nav-inner{
-    flex-direction:column;
-    gap:14px;
-  }
-  .nav-menu{
-    flex-direction:row;
-    gap:22px;
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-  .logo-img{
-    height:54px;
-  }
-}
+        .hero-title {
+            font-family: var(--font-title);
+            font-size: clamp(40px, 10vw, 100px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -3px;
+            margin-bottom: 35px;
+        }
 
-/* ============================
-   HERO
-   ============================ */
-.hero{
-  text-align:center;
-  padding:120px 20px 80px;
-  max-width:900px;
-  margin:0 auto;
-}
+        .hero-title span {
+            color: var(--gold);
+            display: block;
+        }
 
-.hero-title{
-  font-family:'Montserrat',sans-serif;
-  font-size:clamp(45px,12vw,95px);
-  font-weight:900;
-  letter-spacing:-3px;
-  line-height:0.9;
-}
+        .hero-sub {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+        }
 
-.hero-title span{
-  color:var(--gold);
-  text-shadow:0 0 30px rgba(197,160,89,0.3);
-}
+        .hero-sub span {
+            font-size: 13px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px 16px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+        }
 
-.hero-sub{
-  margin-top:20px;
-  color:var(--muted);
-  text-transform:uppercase;
-  letter-spacing:3px;
-  font-size:16px;
-}
+        /* ============================
+           PRICING GRID
+           ============================ */
+        .container { max-width: 1300px; margin: 0 auto; padding: 60px 20px; }
 
-/* ============================
-   PRICING GRID
-   ============================ */
-.container{
-  max-width:var(--max-width);
-  margin:0 auto;
-  padding:0 20px 80px;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 25px;
+        }
 
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:24px;
-  margin-top:40px;
-}
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px 30px;
+            transition: 0.4s ease;
+        }
 
-.card{
-  background:#0b0b0b;
-  border:1px solid rgba(255,255,255,0.1);
-  padding:40px 30px;
-  border-radius:14px;
-  transition:.3s;
-}
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+        }
 
-.card:hover{
-  border-color:var(--gold);
-  transform:translateY(-6px);
-  background:#101010;
-  box-shadow:0 18px 60px rgba(0,0,0,0.7);
-}
+        .card h3 { color: var(--gold); font-size: 24px; margin-bottom: 10px; font-family: var(--font-title); text-transform: uppercase;}
+        .price { font-size: 40px; font-weight: 900; margin-bottom: 25px; }
 
-.card h3{
-  font-size:26px;
-  color:var(--gold);
-  margin-bottom:10px;
-  text-transform:uppercase;
-}
+        .card ul { list-style: none; margin-bottom: 30px; }
+        .card li {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            text-transform: uppercase;
+        }
 
-.price{
-  font-size:40px;
-  font-weight:900;
-  margin-bottom:20px;
-}
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+            color: #000;
+            border: none;
+            border-radius: 10px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-.card ul{
-  list-style:none;
-  margin-bottom:30px;
-}
+        .btn:hover { filter: brightness(1.2); box-shadow: 0 0 20px var(--gold-glow); }
 
-.card li{
-  padding:10px 0;
-  border-bottom:1px solid rgba(255,255,255,0.08);
-  color:var(--muted);
-  text-transform:uppercase;
-  font-size:14px;
-}
+        /* ============================
+           APPLY SECTION
+           ============================ */
+        .apply {
+            background: #0a0a0a;
+            border: 1px solid var(--gold);
+            padding: 60px 30px;
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 80px auto;
+        }
 
-.btn{
-  width:100%;
-  padding:16px;
-  background:linear-gradient(90deg,var(--gold),var(--gold-bright));
-  color:#000;
-  border:none;
-  border-radius:10px;
-  font-weight:900;
-  letter-spacing:2px;
-  cursor:pointer;
-  transition:.3s;
-}
+        .apply h2 { text-align: center; font-family: var(--font-title); margin-bottom: 40px; }
 
-.btn:hover{
-  background:#fff;
-  box-shadow:0 0 20px rgba(255,255,255,0.4);
-}
+        input {
+            width: 100%;
+            padding: 18px;
+            margin-bottom: 15px;
+            background: #000;
+            border: 1px solid #222;
+            color: #fff;
+            border-radius: 8px;
+        }
 
-/* ============================
-   APPLY SECTION
-   ============================ */
-.apply{
-  background:#0a0a0a;
-  border:1px solid var(--gold);
-  padding:60px 30px;
-  border-radius:16px;
-  max-width:800px;
-  margin:0 auto 70px;
-}
+        /* ============================
+           TESTIMONIALS & TRUSTPILOT
+           ============================ */
+        .section-title { font-family: var(--font-title); margin-bottom: 40px; text-align: center; text-transform: uppercase; letter-spacing: 2px;}
 
-.apply h2{
-  text-align:center;
-  font-family:'Montserrat',sans-serif;
-  font-size:36px;
-  margin-bottom:40px;
-}
+        .testimonials { max-width: 950px; margin: 0 auto 80px; padding: 0 20px;}
 
-input{
-  width:100%;
-  padding:18px;
-  margin-bottom:20px;
-  background:#000;
-  border:1px solid #222;
-  color:#fff;
-  border-radius:8px;
-}
+        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
 
-input:focus{
-  border-color:var(--gold);
-  outline:none;
-}
+        .testimonial-card {
+            background: #0b0b0b;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            padding: 25px;
+            font-size: 14px;
+            color: #bdbdbd;
+        }
 
-.success{
-  text-align:center;
-  color:var(--gold);
-  margin-top:20px;
-  font-weight:700;
-}
+        .trustpilot-block {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            font-size: 14px;
+        }
 
-/* ============================
-   TESTIMONIALS
-   ============================ */
-.section-title{
-  font-family:'Montserrat',sans-serif;
-  font-size:26px;
-  margin-bottom:20px;
-  text-transform:uppercase;
-  letter-spacing:2px;
-}
+        .trustpilot-btn {
+            background: #00b67a;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
 
-.testimonials{
-  max-width:900px;
-  margin:0 auto 60px;
-  padding:0 20px;
-}
+        /* ============================
+           MARKET CHARTS
+           ============================ */
+        .markets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
 
-.testimonial-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-}
+        .market-card { background: #0b0b0b; border-radius: 15px; border: 1px solid var(--border); padding: 15px; }
 
-.testimonial-card{
-  background:#0b0b0b;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.08);
-  padding:20px 18px;
-  font-size:14px;
-  color:var(--muted);
-}
+        .chart-frame { width: 100%; height: 320px; border-radius: 10px; border: none; }
 
-.testimonial-name{
-  font-weight:700;
-  color:#fff;
-  font-size:13px;
-  margin-top:8px;
-}
+        /* MOBILE FIXES */
+        @media (max-width: 768px) {
+            nav { height: auto; padding: 15px 0; }
+            .nav-inner { flex-direction: column; gap: 15px; padding: 0 10px; }
+            .nav-menu { gap: 15px; }
+            .nav-menu a { font-size: 11px; letter-spacing: 1px; }
+            
+            .hero-title { font-size: 45px; }
+            .hero-sub span { width: 100%; text-align: center; font-size: 12px; }
+            
+            .trustpilot-block { justify-content: center; text-align: center; }
+        }
 
-.trustpilot-block{
-  margin-top:25px;
-  padding:16px 18px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,0.08);
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  font-size:13px;
-  color:var(--muted);
-}
-
-.trustpilot-btn{
-  background:#00b67a;
-  color:#000;
-  padding:10px 18px;
-  border-radius:999px;
-  font-weight:700;
-  text-decoration:none;
-  font-size:13px;
-  letter-spacing:1px;
-}
-
-/* ============================
-   MARKET CHARTS
-   ============================ */
-.markets{
-  max-width:var(--max-width);
-  margin:0 auto 80px;
-  padding:0 20px;
-}
-
-.markets-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-}
-
-.market-card{
-  background:#0b0b0b;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,0.08);
-  padding:16px;
-}
-
-.market-card h4{
-  font-size:14px;
-  text-transform:uppercase;
-  letter-spacing:2px;
-  margin-bottom:8px;
-  color:var(--muted);
-}
-
-.chart-frame{
-  width:100%;
-  height:260px;
-  border:none;
-  border-radius:10px;
-  overflow:hidden;
-}
-</style>
+    </style>
 </head>
 
 <body>
 
-<!-- NAVBAR -->
 <nav>
-  <div class="nav-inner">
-    <img src="image/Logo.png" class="logo-img">
-    <ul class="nav-menu">
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="#apply">APPLY</a></li>
-      <li><a href="portfolio.html">PORTFOLIO</a></li>
-    </ul>
-  </div>
+    <div class="nav-inner">
+        <img src="image/Logo.png" class="logo-img" alt="Logo">
+        <ul class="nav-menu">
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="#apply">APPLY</a></li>
+            <li><a href="portfolio.html">PORTFOLIO</a></li>
+        </ul>
+    </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-title">LEGACY <span>ACADEMY</span></div>
-  <div class="hero-sub">
-  STRUCTURED EDUCATION •RISK MANAGEMENT<br>
-  LONG‑TERM SKILL
-</div>
+    <div class="hero-title">LEGACY <span>ACADEMY</span></div>
+    <div class="hero-sub">
+        <span><i class="fas fa-graduation-cap"></i> Structured Education</span>
+        <span><i class="fas fa-shield-alt"></i> Risk Management</span>
+        <span><i class="fas fa-chart-line"></i> Master the Markets</span>
+    </div>
 </section>
 
-<!-- PACKAGES -->
 <div class="container">
-  <div class="grid">
+    <div class="grid">
 
-    <div class="card">
-      <h3>Starter</h3>
-      <div class="price">€300</div>
-      <ul>
-        <li>1‑on‑1 Strategy Session</li>
-        <li>AI Fundamentals</li>
-        <li>Trading Manual</li>
-      </ul>
-      <button class="btn" onclick="selectPkg('Starter',300)">CLAIM ACCESS</button>
+        <div class="card">
+            <h3>Starter</h3>
+            <div class="price">€300</div>
+            <ul>
+                <li>1‑on‑1 Strategy Session</li>
+                <li>AI Fundamentals</li>
+                <li>Trading Manual</li>
+            </ul>
+            <button class="btn" onclick="selectPkg('Starter',300)">CLAIM ACCESS</button>
+        </div>
+
+        <div class="card" style="border: 1px solid var(--gold); background: rgba(197, 160, 89, 0.05);">
+            <h3>Professional</h3>
+            <div class="price">€1,250</div>
+            <ul>
+                <li>8‑Week Mentorship</li>
+                <li>Advanced AI Signals</li>
+                <li>Direct Network Access</li>
+            </ul>
+            <button class="btn" onclick="selectPkg('Professional',1250)">CLAIM ACCESS</button>
+        </div>
+
+        <div class="card">
+            <h3>Elite</h3>
+            <div class="price">€6,250</div>
+            <ul>
+                <li>Lifetime Mastermind</li>
+                <li>Custom AI Algo</li>
+                <li>Founder Audit</li>
+            </ul>
+            <button class="btn" onclick="selectPkg('Elite',6250)">CLAIM ACCESS</button>
+        </div>
+
     </div>
 
-    <div class="card" style="border:2px solid var(--gold)">
-      <h3>Professional</h3>
-      <div class="price">€1,250</div>
-      <ul>
-        <li>8‑Week Mentorship</li>
-        <li>Advanced AI Signals</li>
-        <li>Direct Network Access</li>
-      </ul>
-      <button class="btn" onclick="selectPkg('Professional',1250)">CLAIM ACCESS</button>
+    <div class="apply" id="apply">
+        <h2>ENTER THE ACADEMY</h2>
+        <form id="form">
+            <input type="text" id="name" placeholder="FULL NAME" required>
+            <input type="email" id="email" placeholder="EMAIL" required>
+            <input type="tel" id="phone" placeholder="WHATSAPP NUMBER" required>
+            <input type="text" id="package" placeholder="SELECTED PACKAGE" readonly>
+
+            <button class="btn" type="submit">SUBMIT APPLICATION</button>
+            <div class="success" id="success" style="text-align:center; color:var(--gold); margin-top:20px; font-weight:bold;"></div>
+        </form>
     </div>
-
-    <div class="card">
-      <h3>Elite</h3>
-      <div class="price">€6,250</div>
-      <ul>
-        <li>Lifetime Mastermind</li>
-        <li>Custom AI Algo</li>
-        <li>Founder Audit</li>
-      </ul>
-      <button class="btn" onclick="selectPkg('Elite',6250)">CLAIM ACCESS</button>
-    </div>
-
-  </div>
-
-  <!-- APPLY -->
-  <div class="apply" id="apply">
-    <h2>ENTER THE ACADEMY</h2>
-    <form id="form">
-      <input type="text" id="name" placeholder="FULL NAME" required>
-      <input type="email" id="email" placeholder="EMAIL" required>
-      <input type="tel" id="phone" placeholder="WHATSAPP NUMBER" required>
-      <input type="text" id="package" placeholder="SELECTED PACKAGE" readonly>
-
-      <button class="btn" type="submit">SUBMIT APPLICATION</button>
-      <div class="success" id="success"></div>
-    </form>
-  </div>
 </div>
 
-<!-- TESTIMONIALS -->
 <section class="testimonials">
-  <h3 class="section-title">What Students Say</h3>
-  <div class="testimonial-grid">
-    <div class="testimonial-card">
-      “From consistent losses to profitable months. Risk management and psychology fixed – real results.”
-      <div class="testimonial-name">– Alex, Germany (Professional)</div>
+    <h3 class="section-title">What Students Say</h3>
+    <div class="testimonial-grid">
+        <div class="testimonial-card">
+            “From consistent losses to profitable months. Risk management and psychology fixed – real results.”
+            <div style="color:#fff; font-weight:700; font-size:12px; margin-top:10px;">– Alex, Germany (Professional)</div>
+        </div>
+        <div class="testimonial-card">
+            “Starter fixed LinkedIn + basics. Upgraded to Professional – worth it.”
+            <div style="color:#fff; font-weight:700; font-size:12px; margin-top:10px;">– Marco, UK (Starter)</div>
+        </div>
     </div>
-    <div class="testimonial-card">
-      “Starter fixed LinkedIn + basics. Upgraded to Professional – worth it.”
-      <div class="testimonial-name">– Marco, UK (Starter)</div>
-    </div>
-  </div>
 
-  <div class="trustpilot-block">
-    <span>Independent feedback available on Trustpilot.</span>
-    <a class="trustpilot-btn" href="https://www.trustpilot.com/review/legacyacademy.store" target="_blank">View Reviews</a>
-  </div>
+    <div class="trustpilot-block">
+        <span>Independent feedback available on Trustpilot.</span>
+        <a class="trustpilot-btn" href="https://www.trustpilot.com/review/legacyacademy.store" target="_blank">View Reviews</a>
+    </div>
 </section>
 
-<!-- MARKETS -->
-<section class="markets">
-  <h3 class="section-title">Market View</h3>
-  <div class="markets-grid">
-    <div class="market-card">
-      <h4>Gold (XAUUSD)</h4>
-      <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=60&theme=dark"></iframe>
+<section class="container">
+    <h3 class="section-title">Market View</h3>
+    <div class="markets-grid">
+        <div class="market-card">
+            <h4 style="font-size:12px; margin-bottom:10px; color:#bdbdbd;">GOLD (XAUUSD)</h4>
+            <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAUUSD&interval=60&theme=dark"></iframe>
+        </div>
+        <div class="market-card">
+            <h4 style="font-size:12px; margin-bottom:10px; color:#bdbdbd;">SILVER (XAGUSD)</h4>
+            <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAGUSD&interval=60&theme=dark"></iframe>
+        </div>
+        <div class="market-card">
+            <h4 style="font-size:12px; margin-bottom:10px; color:#bdbdbd;">BITCOIN (BTCUSDT)</h4>
+            <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=dark"></iframe>
+        </div>
     </div>
-    <div class="market-card">
-      <h4>Silver (XAGUSD)</h4>
-      <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=OANDA:XAGUSD&interval=60&theme=dark"></iframe>
-    </div>
-    <div class="market-card">
-      <h4>Bitcoin (BTCUSDT)</h4>
-      <iframe class="chart-frame" src="https://s.tradingview.com/widgetembed/?symbol=BINANCE:BTCUSDT&interval=60&theme=dark"></iframe>
-    </div>
-  </div>
 </section>
 
 <script>
 function selectPkg(name, price){
-  document.getElementById("package").value = name + " — €" + price;
-  document.getElementById("apply").scrollIntoView({behavior:"smooth"});
+    document.getElementById("package").value = name + " — €" + price;
+    document.getElementById("apply").scrollIntoView({behavior:"smooth"});
 }
 
 document.getElementById("form").addEventListener("submit", e=>{
-  e.preventDefault();
-  document.getElementById("success").innerText = "APPLICATION RECEIVED — CHECK YOUR EMAIL";
+    e.preventDefault();
+    document.getElementById("success").innerText = "APPLICATION RECEIVED — CHECK YOUR EMAIL";
 });
 </script>
 
