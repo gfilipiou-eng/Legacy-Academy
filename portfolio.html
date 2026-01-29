@@ -4,230 +4,309 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>Filippos Tailakidis — Portfolio</title>
+    
+    <link rel="icon" type="image/svg+xml" href="image/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    
     <style>
         :root {
             --gold: #c5a059;
-            --gold-bright: #ffe3aa;
+            --red: #ff0000;
+            --red-deep: #800000;
             --text: #e9e9e9;
-            --bg: #000;
-            --card: #0a0a0a;
-            --nav-h: 80px;
+            --bg: #050505;
+            --card: #080808; 
+            --nav-h: 100px;
         }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background: #000;
+            background: var(--bg);
             color: var(--text);
             font-family: 'Inter', sans-serif;
             padding-top: var(--nav-h);
             overflow-x: hidden;
         }
+
+        /* FIX: LUXURY PURPLE ANIMATED BACKGROUND */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            /* Χρησιμοποιούμε 400% size για να υπάρχει χώρος για την κίνηση */
+            background: linear-gradient(125deg, #050505, #0d0616, #1a0b2e, #0d0616, #050505);
+            background-size: 400% 400%;
+            animation: luxuryGradient 10s ease-in-out infinite;
+        }
+
+        @keyframes luxuryGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0; left: 0; right: 0;
             height: var(--nav-h);
-            background: rgba(0,0,0,0.98);
-            backdrop-filter: blur(15px);
-            border-bottom: 1px solid rgba(197,160,89,0.2);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
             z-index: 10000;
             display: flex;
             align-items: center;
         }
+
         .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 25px;
             width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        .logo {
-            height: 50px;
-            filter: drop-shadow(0 0 10px rgba(197,160,89,0.35));
+
+        .logo { height: 65px; display: block; } 
+
+        .nav-menu { display: flex; gap: 35px; list-style: none; }
+        .nav-menu a { 
+            color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; 
+            font-weight: 800; font-size: 12px; letter-spacing: 2px; 
+            transition: 0.3s; opacity: 0.6; text-transform: uppercase;
         }
-        .menu { display: flex; gap: 24px; list-style: none; }
-        .menu a {
-            color: white;
-            text-decoration: none;
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 12px;
-            letter-spacing: 1.2px;
-            text-transform: uppercase;
-        }
+        .nav-menu a:hover { opacity: 1; color: var(--gold); }
+
+        .menu-toggle { display: none; color: var(--gold); font-size: 24px; cursor: pointer; }
+
+        /* MAIN LAYOUT */
         main {
             max-width: 1200px;
-            margin: 30px auto 60px;
+            margin: 40px auto 60px;
             padding: 0 20px;
             display: grid;
-            grid-template-columns: 1fr 400px;
+            grid-template-columns: 400px 1fr;
             gap: 50px;
         }
-        h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #fff, var(--gold-bright));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .bio {
-            background: rgba(255,255,255,0.03);
-            border-radius: 12px;
-            padding: 28px;
-            margin-bottom: 40px;
-            border: 1px solid rgba(197,160,89,0.12);
-        }
-        .bio h2 { color: var(--gold); font-size: 1.15rem; margin-bottom: 10px; text-transform: uppercase; }
-        .bio p { color: #bbb; line-height: 1.65; font-size: 1.05rem; }
-        .gallery-header {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 800;
-            font-size: 1rem;
-            color: var(--gold);
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-        .gallery-item {
-            aspect-ratio: 1 / 1;
-            overflow: hidden;
-            cursor: pointer;
-            background: #111;
-            border-radius: 8px;
-            transition: transform 0.35s ease;
-        }
-        .gallery-item:hover {
-            transform: scale(1.03);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            display: block;
-        }
+
+        /* CARD STYLE */
         .card {
             background: var(--card);
-            border: 1px solid rgba(197,160,89,0.2);
+            border: 1px solid rgba(255, 0, 0, 0.15);
             border-radius: 20px;
-            padding: 35px 25px;
+            padding: 50px 30px;
             text-align: center;
             position: sticky;
-            top: 100px;
+            top: 130px;
             height: fit-content;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
         }
-        .badge {
-            background: var(--gold);
-            color: #000;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 900;
+
+        /* ROLE BADGES */
+        .role-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
             margin-bottom: 25px;
-            display: inline-block;
         }
+        .role-badge {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .role-badge.primary {
+            background: var(--red);
+            border-color: var(--red);
+        }
+
         .photo-wrap {
             position: relative;
             width: 140px; height: 140px;
             margin: 0 auto 20px;
         }
-        .gold-ring {
+
+        .red-ring {
             position: absolute; inset: -4px;
             border-radius: 50%;
-            background: conic-gradient(from var(--rot, 0deg), var(--gold), transparent, var(--gold-bright), transparent, var(--gold));
+            background: conic-gradient(from var(--rot, 0deg), var(--red), transparent, var(--red-deep), transparent, var(--red));
             animation: rotate 3s linear infinite;
         }
+
         @property --rot { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
         @keyframes rotate { from { --rot: 0deg; } to { --rot: 360deg; } }
+
         .profile-photo {
             position: relative; z-index: 2;
             width: 100%; height: 100%;
             border-radius: 50%; object-fit: cover;
-            border: 3px solid #000;
+            border: 4px solid #080808;
         }
-        .name { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 6px; }
-        .role { color: var(--gold); font-size: 10px; letter-spacing: 2.2px; text-transform: uppercase; margin-bottom: 28px; }
-        .socials { display: flex; flex-direction: column; gap: 12px; }
+
+        .card-name { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 20px; }
+
+        .socials { display: flex; flex-direction: column; gap: 10px; }
         .social-pill {
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            padding: 13px; border-radius: 10px; background: rgba(255,255,255,0.05);
-            color: white; text-decoration: none; font-weight: 700; font-size: 0.9rem;
-            border: 1px solid rgba(197,160,89,0.15);
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 12px; border-radius: 8px; background: #000;
+            color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem;
+            border: 1px solid #111;
             transition: 0.3s;
         }
-        .social-pill:hover { background: var(--gold); color: #000; transform: translateX(6px); }
+        .social-pill:hover { border-color: var(--red); color: var(--red); transform: translateX(5px); }
+
+        /* CONTENT */
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 30px;
+            letter-spacing: -2px;
+            background: linear-gradient(to bottom, #fff 50%, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bio {
+            background: rgba(255,255,255,0.01);
+            border-radius: 0 20px 0 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border-left: 2px solid var(--red);
+        }
+        .bio h2 { color: var(--red); font-size: 0.9rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 3px; }
+        .bio p { color: #aaa; line-height: 1.8; font-size: 1.1rem; }
+
+        .gallery-header {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 2px;
+        }
+        .gallery-header i { color: var(--red); }
+        .gallery-header::after { content: ""; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            cursor: pointer;
+            filter: grayscale(0.3);
+            transition: 0.5s;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        .gallery-item:hover { filter: grayscale(0); transform: scale(0.98); }
+
+        /* MODAL */
         .modal {
-            position: fixed; inset: 0; background: #000;
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95);
             display: none; align-items: center; justify-content: center; z-index: 100000;
+            backdrop-filter: blur(15px);
+            padding: 20px;
         }
         .modal.show { display: flex; }
-        .modal img { max-width: 100%; max-height: 100vh; object-fit: contain; }
-        .modal-close { position: absolute; top: 20px; right: 20px; font-size: 32px; color: #fff; cursor: pointer; }
+        .modal img { 
+            max-width: 100%; 
+            max-height: 90vh; 
+            object-fit: contain; 
+            border-radius: 8px;
+            animation: zoomIn 0.3s ease;
+        }
+        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-close { position: absolute; top: 40px; right: 40px; font-size: 40px; color: #fff; cursor: pointer; }
 
-        /* MOBILE - Instagram exact grid */
+        /* MOBILE */
         @media (max-width: 900px) {
-            main {
-                grid-template-columns: 1fr;
-                padding: 0;
-                margin: 0;
+            nav { height: 90px; }
+            .logo { height: 50px; }
+            .nav-menu { 
+                display: none; position: absolute; top: 90px; left: 0; width: 100%; 
+                background: #000; flex-direction: column; padding: 40px; 
             }
-            h1, .bio, .gallery-header {
-                padding: 0 16px;
-                text-align: center;
-            }
-            .gallery {
-                gap: 0;
-                width: 100vw;
-                margin-left: calc(-50vw + 50%);
-                margin-right: calc(-50vw + 50%);
-            }
-            .gallery-item {
-                border-radius: 0;
-            }
-            .gallery-item:hover img { transform: scale(1.02); }
-            .card {
-                position: static;
-                margin: 30px 16px;
-                border-radius: 0;
-            }
-            h1 { font-size: 2.2rem; }
-            .logo { height: 42px; }
+            .nav-menu.active { display: flex; }
+            .menu-toggle { display: block; }
+
+            main { grid-template-columns: 1fr; margin-top: 10px; gap: 30px; }
+            .card { position: relative; top: 0; order: -1; border-radius: 0; border-inline: none; padding: 40px 20px; } 
+            h1 { text-align: center; font-size: 2.5rem; }
+            .gallery { grid-template-columns: repeat(3, 1fr); gap: 2px; }
         }
     </style>
 </head>
 <body>
+
+<div class="bg-gradient"></div>
+
 <nav>
     <div class="nav-inner">
         <img src="image/Logo.png" class="logo" alt="Logo">
-        <ul class="menu">
+        <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <ul class="nav-menu" id="navMenu">
             <li><a href="index.html">HOME</a></li>
+            <li><a href="index.html#packages">ACADEMY</a></li>
             <li><a href="index.html#apply">APPLY</a></li>
             <li><a href="portfolio.html">PORTFOLIO</a></li>
         </ul>
     </div>
 </nav>
+
 <main>
+    <aside class="card">
+        <div class="role-badges">
+            <span class="role-badge primary">Founder</span>
+            <span class="role-badge">Visionary</span>
+            <span class="role-badge">Entrepreneur</span>
+            <span class="role-badge">Coder</span>
+        </div>
+        
+        <div class="photo-wrap">
+            <div class="red-ring"></div>
+            <img src="image/filip.jpg" class="profile-photo" alt="Filippos">
+        </div>
+        
+        <div class="card-name">FILIPPOS TAILAKIDIS</div>
+        
+        <div class="socials">
+            <a class="social-pill" href="https://open.spotify.com/user/31dcojj2flngqkzytjsq3i5wj75i?si=2va6iKhrQbyoo-OIiOGMjA&nd=1&dlsi=54b4ddeb371047b7" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
+            <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+            <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+            <a class="social-pill" href="mailto:filippostailakidis@outlook.de"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+    </aside>
+
     <section>
         <h1>FILIPPOS TAILAKIDIS</h1>
+        
         <div class="bio">
             <h2>Bio</h2>
             <p>
-                Founder & Developer focusing on high-end digital experiences. Obsessed with detail, clean code, and elegant design.
+               Entrepreneur and code visionary, founder of Legacy Academy — a premium education platform focused on AI, risk management, and mastering the markets. I build legacy-grade systems that bridge strategic engineering with uncompromising design. Founder | Visionary | Builder.
             </p>
         </div>
+
         <div class="gallery-header">
-            <i class="fas fa-th"></i> Gallery
+            <i class="fas fa-camera-retro"></i> Gallery
         </div>
       
         <div class="gallery">
@@ -248,28 +327,19 @@
             </div>
         </div>
     </section>
-    <aside class="card">
-        <div class="badge">FOUNDER</div>
-        <div class="photo-wrap">
-            <div class="gold-ring"></div>
-            <img src="image/filip.jpg" class="profile-photo" alt="Filippos">
-        </div>
-        <div class="name">FILIPPOS TAILAKIDIS</div>
-        <div class="role">Founder · Programmer</div>
-        <div class="socials">
-            <a class="social-pill" href="https://open.spotify.com" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
-            <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
-            <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
-            <a class="social-pill" href="mailto:filippostailakidis@outlook.de"><i class="fas fa-envelope"></i> Email</a>
-        </div>
-    </aside>
 </main>
+
 <div class="modal" id="modal">
     <span class="modal-close" onclick="closeModal()">✕</span>
     <img id="modalImg" src="">
 </div>
+
 <script>
+    function toggleMenu() {
+        const menu = document.getElementById("navMenu");
+        menu.classList.toggle("active");
+    }
+
     function openModal(src) {
         const m = document.getElementById("modal");
         const img = document.getElementById("modalImg");
@@ -286,5 +356,6 @@
         if (e.target === this) closeModal();
     });
 </script>
+
 </body>
 </html>
