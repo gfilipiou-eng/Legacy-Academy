@@ -13,142 +13,98 @@
         :root {
             --gold: #c5a059;
             --red: #ff0000;
-            --red-deep: #800000;
+            --verify-blue: #0095f6;
             --bg: #000000;
             --card: #080808;
             --nav-h: 100px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        
-        body {
-            background: var(--bg);
-            color: #e9e9e9;
-            font-family: 'Inter', sans-serif;
-            padding-top: var(--nav-h);
-            overflow-x: hidden;
-        }
+        body { background: var(--bg); color: #e9e9e9; font-family: 'Inter', sans-serif; padding-top: var(--nav-h); overflow-x: hidden; }
 
-        /* --- HACKER RED GRID BACKGROUND (SYNCED WITH INDEX) --- */
-        .bg-gradient {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: #000;
-            overflow: hidden;
-        }
-
+        /* --- RED GRID BACKGROUND (ORIGINAL) --- */
+        .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; overflow: hidden; }
         .bg-gradient::before {
-            content: "";
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background-image: 
-                linear-gradient(rgba(255, 0, 0, 0.12) 1.5px, transparent 1.5px),
-                linear-gradient(90deg, rgba(255, 0, 0, 0.12) 1.5px, transparent 1.5px);
-            background-size: 60px 60px;
-            transform: perspective(500px) rotateX(60deg);
-            animation: gridMove 12s linear infinite;
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background-image: linear-gradient(rgba(255, 0, 0, 0.12) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(255, 0, 0, 0.12) 1.5px, transparent 1.5px);
+            background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); animation: gridMove 12s linear infinite;
         }
+        @keyframes gridMove { from { transform: perspective(500px) rotateX(60deg) translateY(0); } to { transform: perspective(500px) rotateX(60deg) translateY(60px); } }
 
-        @keyframes gridMove {
-            from { transform: perspective(500px) rotateX(60deg) translateY(0); }
-            to { transform: perspective(500px) rotateX(60deg) translateY(60px); }
-        }
-
-        /* --- NAVIGATION (EXACT SYNC WITH INDEX) --- */
-        nav {
-            position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
-            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 10000;
-            display: flex; align-items: center;
-        }
+        /* --- NAVIGATION (SYNCED) --- */
+        nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 10000; display: flex; align-items: center; }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 25px; width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo { height: 65px; display: block; transition: 0.3s; }
-        .logo:hover { opacity: 0.8; }
-
+        .logo { height: 65px; display: block; }
         .nav-menu { display: flex; gap: 35px; list-style: none; }
-        .nav-menu a { 
-            color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; 
-            font-weight: 800; font-size: 12px; letter-spacing: 2px; 
-            text-transform: uppercase; opacity: 0.6; transition: 0.3s; 
-        }
+        .nav-menu a { color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; transition: 0.3s; }
         .nav-menu a:hover { opacity: 1; color: var(--red); }
-        
-        /* --- MENU TOGGLE (NO GLOW, SYNCED SIZE) --- */
-        .menu-toggle { 
-            display: none; 
-            color: var(--red); 
-            font-size: 22px; 
-            cursor: pointer; 
-            filter: none; 
-        }
+        .menu-toggle { display: none; color: var(--red); font-size: 22px; cursor: pointer; }
 
         /* --- MAIN LAYOUT --- */
-        main {
-            max-width: 1200px; margin: 40px auto 60px; padding: 0 20px;
-            display: grid; grid-template-columns: 400px 1fr; gap: 50px;
-        }
+        main { max-width: 1200px; margin: 40px auto 60px; padding: 0 20px; display: grid; grid-template-columns: 400px 1fr; gap: 50px; }
 
-        /* --- FOUNDER CARD --- */
-        .card {
-            background: var(--card); border: 1px solid rgba(255, 0, 0, 0.2); border-radius: 20px;
-            padding: 50px 30px; text-align: center; position: sticky; top: 130px;
-            height: fit-content; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .role-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 25px; }
+        /* --- CARD --- */
+        .card { background: var(--card); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 20px; padding: 50px 30px; text-align: center; position: sticky; top: 130px; height: fit-content; backdrop-filter: blur(10px); }
+        .role-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 30px; }
         .role-badge { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 4px 12px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .role-badge.primary { background: var(--red); border-color: var(--red); }
 
-        .photo-wrap { 
-            position: relative; width: 140px; height: 140px; margin: 0 auto 20px; 
-            background: #111; border-radius: 50%;
+        /* --- PERFECT RED CIRCLE (CLEAN) --- */
+        .profile-wrapper {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
-        .red-ring {
-            position: absolute; inset: -5px; border-radius: 50%;
-            border: 2px solid var(--red);
-            box-shadow: 0 0 15px var(--red);
-            animation: pulse 2s infinite;
+
+        .circle-svg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            transform: rotate(-90deg);
+            pointer-events: none;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.03); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+
+        .circle-svg circle {
+            fill: none;
+            stroke: var(--red);
+            stroke-width: 3;
+            stroke-dasharray: 440;
+            opacity: 0.8;
         }
 
         .profile-photo {
-            position: relative; z-index: 2; width: 100%; height: 100%;
-            border-radius: 50%; object-fit: cover; border: 4px solid #000;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #000;
+            position: relative;
+            z-index: 2;
         }
 
-        .card-name { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 25px; }
+        /* --- NAME & VERIFY --- */
+        .name-container { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 25px; }
+        .card-name { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 900; color: #fff; text-transform: uppercase; }
+        .verify-badge { color: var(--verify-blue); font-size: 1.1rem; }
 
-        /* --- SOCIAL BUTTONS --- */
+        /* --- SOCIALS --- */
         .socials { display: flex; flex-direction: column; gap: 12px; }
-        .social-pill {
-            display: flex; align-items: center; justify-content: center; gap: 12px;
-            padding: 14px; border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem;
-            letter-spacing: 1px; text-transform: uppercase; transition: 0.3s;
-        }
-        .social-pill:hover { 
-            background: rgba(255, 0, 0, 0.1); border-color: var(--red);
-            color: var(--red); transform: translateY(-3px);
-        }
+        .social-pill { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); color: white; text-decoration: none; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: 0.3s; }
+        .social-pill:hover { background: rgba(255, 0, 0, 0.1); border-color: var(--red); color: var(--red); transform: translateY(-3px); }
         .social-pill.email-btn { background: rgba(197, 160, 89, 0.1); border-color: var(--gold); color: var(--gold); }
         .social-pill.email-btn:hover { background: var(--gold); color: #000; }
 
         /* --- CONTENT --- */
         h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin-bottom: 30px; letter-spacing: -2px; }
-        .bio { background: rgba(255, 255, 255, 0.02); border-radius: 0 20px 0 20px; padding: 40px; margin-bottom: 50px; border-left: 3px solid var(--red); }
+        .bio { background: rgba(255, 255, 255, 0.02); border-radius: 20px; padding: 40px; margin-bottom: 50px; border-left: 3px solid var(--red); }
         .bio h2 { color: var(--red); font-size: 0.9rem; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 3px; }
         .bio p { color: #aaa; line-height: 1.8; font-size: 1.1rem; }
 
-        .gallery-header { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: #fff; text-transform: uppercase; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; }
+        .gallery-header { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: #fff; text-transform: uppercase; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
+        .gallery-header i { color: var(--red); font-size: 1.2rem; }
         .gallery-header::after { content: ""; flex: 1; height: 1px; background: rgba(255, 0, 0, 0.2); }
 
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
@@ -162,23 +118,19 @@
         .modal img { max-width: 100%; max-height: 90vh; object-fit: contain; border-radius: 10px; border: 1px solid rgba(255,0,0,0.3); }
         .modal-close { position: absolute; top: 30px; right: 30px; font-size: 35px; color: #fff; cursor: pointer; }
 
-        /* --- MOBILE SYNC --- */
+        /* --- MOBILE --- */
         @media (max-width: 900px) {
-            nav { height: 80px; }
-            .logo { height: 50px; }
+            nav { height: 80px; } .logo { height: 50px; }
             .menu-toggle { display: block; }
-            .nav-menu { 
-                display: none; position: absolute; top: 80px; left: 0; width: 100%; 
-                background: #000; flex-direction: column; padding: 40px; text-align: center; 
-                border-bottom: 2px solid var(--red); 
-            }
+            .nav-menu { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: #000; flex-direction: column; padding: 40px; text-align: center; border-bottom: 2px solid var(--red); }
             .nav-menu.active { display: flex; }
-
             main { grid-template-columns: 1fr; margin-top: 0; gap: 30px; padding: 0; }
-            .card { position: relative; top: 0; order: -1; margin: 10px 15px 25px; padding: 35px 20px; }
+            .card { position: relative; top: 0; order: -1; margin: 10px 15px 25px; padding: 35px 20px; border: 1px solid rgba(255,255,255,0.05); }
             .socials { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
             .social-pill.email-btn { grid-column: span 2; }
-            .gallery { grid-template-columns: repeat(2, 1fr); }
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 10px; }
+            .gallery-header { padding: 0 15px; }
+            h1 { text-align: center; margin: 0 15px 30px; }
         }
     </style>
 </head>
@@ -208,15 +160,20 @@
                 <span class="role-badge">Coder</span>
             </div>
             
-            <div class="photo-wrap">
-                <div class="red-ring"></div>
+            <div class="profile-wrapper">
+                <svg class="circle-svg" viewBox="0 0 150 150">
+                    <circle cx="75" cy="75" r="72"></circle>
+                </svg>
                 <img src="image/filip.jpg" class="profile-photo" alt="Filippos">
             </div>
             
-            <div class="card-name">FILIPPOS TAILAKIDIS</div>
+            <div class="name-container">
+                <div class="card-name">FILIPPOS</div>
+                <div class="verify-badge"><i class="fas fa-check-circle"></i></div>
+            </div>
             
             <div class="socials">
-                <a class="social-pill" href="https://open.spotify.com" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
+                <a class="social-pill" href="#" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
                 <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
                 <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
                 <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
@@ -226,20 +183,11 @@
 
         <section>
             <h1>FILIPPOS TAILAKIDIS</h1>
-            
             <div class="bio">
                 <h2>Bio</h2>
-                <p>
-                    Entrepreneur and code visionary, founder of Legacy Academy — a premium education platform focused on 
-                    AI, risk management, and mastering the markets. I build legacy-grade systems that bridge strategic 
-                    engineering with uncompromising design.
-                </p>
+                <p>Entrepreneur and code visionary, founder of Legacy Academy. I build legacy-grade systems that bridge strategic engineering with uncompromising design.</p>
             </div>
-
-            <div class="gallery-header">
-                <i class="fas fa-camera-retro"></i> Gallery
-            </div>
-          
+            <div class="gallery-header"><i class="fas fa-camera-retro"></i> Gallery</div>
             <div class="gallery">
                 <div class="gallery-item" onclick="openModal('image/gallery1.jpg')"><img src="image/gallery1.jpg"></div>
                 <div class="gallery-item" onclick="openModal('image/gallery2.jpg')"><img src="image/gallery2.jpg"></div>
@@ -256,28 +204,10 @@
     </div>
 
     <script>
-        function toggleMenu() {
-            document.getElementById("navMenu").classList.toggle("active");
-        }
-
-        function openModal(src) {
-            const m = document.getElementById("modal");
-            document.getElementById("modalImg").src = src;
-            m.classList.add("show");
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const m = document.getElementById("modal");
-            m.classList.remove("show");
-            document.body.style.overflow = 'auto';
-        }
-
-        document.getElementById("modal").addEventListener("click", function (e) {
-            if (e.target === this) closeModal();
-        });
+        function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
+        function openModal(src) { const m = document.getElementById("modal"); document.getElementById("modalImg").src = src; m.classList.add("show"); document.body.style.overflow = 'hidden'; }
+        function closeModal() { const m = document.getElementById("modal"); m.classList.remove("show"); document.body.style.overflow = 'auto'; }
+        document.getElementById("modal").addEventListener("click", function (e) { if (e.target === this) closeModal(); });
     </script>
-
 </body>
 </html>
-
