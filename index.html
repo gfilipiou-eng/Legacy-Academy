@@ -47,7 +47,7 @@
             to { transform: perspective(500px) rotateX(60deg) translateY(60px); }
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVIGATION (SYNCED WITH PORTFOLIO) --- */
         nav {
             position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
             background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px);
@@ -55,9 +55,15 @@
             display: flex; align-items: center;
         }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 25px; width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { height: 65px; transition: 0.3s; }
+        .logo { height: 65px; display: block; transition: 0.3s; }
+        .logo:hover { opacity: 0.8; }
+
         .nav-menu { display: flex; gap: 35px; list-style: none; }
-        .nav-menu a { color: #fff; text-decoration: none; font-family: var(--font-title); font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; transition: 0.3s; }
+        .nav-menu a { 
+            color: #fff; text-decoration: none; font-family: var(--font-title); 
+            font-weight: 800; font-size: 12px; letter-spacing: 2px; 
+            text-transform: uppercase; opacity: 0.6; transition: 0.3s; 
+        }
         .nav-menu a:hover { opacity: 1; color: var(--red); }
         .menu-toggle { display: none; color: var(--red); font-size: 22px; cursor: pointer; }
 
@@ -92,6 +98,7 @@
         .card ul { list-style: none; margin-bottom: 30px; text-align: left; flex-grow: 1; }
         .card li { font-size: 13px; color: #ddd; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.03); display: flex; align-items: center; gap: 12px; }
         .card li i { color: var(--gold); font-size: 16px; }
+
         .pkg-btn { width: 100%; padding: 18px; border-radius: 12px; border: none; font-family: var(--font-title); font-weight: 900; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; cursor: pointer; transition: 0.3s; }
         .btn-outline { background: transparent; border: 2px solid #fff; color: #fff; }
         .btn-gold { background: var(--gold); color: #000; }
@@ -102,12 +109,12 @@
         .t-card { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid var(--border); backdrop-filter: blur(10px); }
         .t-user { margin-top: 25px; font-size: 12px; font-weight: 900; color: var(--gold); letter-spacing: 2px; text-transform: uppercase; }
 
-        /* --- JOIN THE LEGACY (CLEAN MOBILE VERSION) --- */
+        /* --- APPLY SECTION (CLEAN & RESPONSIVE) --- */
         .apply-container-elite { max-width: 650px; margin: 80px auto; padding: 50px 40px; background: rgba(5, 5, 5, 0.95); border: 1px solid var(--red); border-radius: 30px; box-shadow: 0 0 40px rgba(255, 0, 0, 0.1); backdrop-filter: blur(20px); }
         
         .elite-title { 
             font-family: var(--font-title); 
-            font-size: clamp(20px, 6vw, 36px); /* Μικρότερο min size για να χωράει πάντα */
+            font-size: clamp(20px, 6vw, 36px); 
             font-weight: 900; 
             letter-spacing: 2px; 
             color: #fff; 
@@ -116,7 +123,7 @@
             line-height: 1.1; 
             margin-bottom: 10px;
         }
-        .red-txt { color: var(--red); } /* Απλό κόκκινο χωρίς εφέ */
+        .red-txt { color: var(--red); }
         
         .protocol-bar { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 30px; }
         .protocol-text { font-size: 9px; letter-spacing: 2px; color: var(--gold); font-weight: 800; text-transform: uppercase; opacity: 0.8; }
@@ -145,7 +152,11 @@
         @media (max-width: 900px) {
             nav { height: 80px; } .logo { height: 50px; }
             .menu-toggle { display: block; }
-            .nav-menu { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: #000; flex-direction: column; padding: 40px; text-align: center; border-bottom: 2px solid var(--red); }
+            .nav-menu { 
+                display: none; position: absolute; top: 80px; left: 0; width: 100%; 
+                background: #000; flex-direction: column; padding: 40px; text-align: center; 
+                border-bottom: 2px solid var(--red); 
+            }
             .nav-menu.active { display: flex; }
             .btn-payment-choice { grid-template-columns: 1fr; }
             .input-grid { grid-template-columns: 1fr; }
@@ -187,14 +198,14 @@
         <div class="grid">
             <div class="card">
                 <h3>Starter</h3>
-                <div class="price">$500</div>
+                <div class="price">$300</div>
                 <ul>
                     <li><i class="fas fa-graduation-cap"></i> <b>Step-by-Step</b> Learning</li>
                     <li><i class="fas fa-robot"></i> <b>Trading AI</b> Basic Signals</li>
-                    <li><i class="fas fa-hashtag"></i> <b>Social Media</b> Success</li>
+                    <li><i class="fas fa-hashtag"></i> <b>Social Media</b> Growth</li>
                     <li><i class="fas fa-headset"></i> Priority Email Support</li>
                 </ul>
-                <button class="pkg-btn btn-outline" onclick="selectPkg('Starter', 500)">Select Starter</button>
+                <button class="pkg-btn btn-outline" onclick="selectPkg('Starter', 300)">Select Starter</button>
             </div>
             
             <div class="card featured">
