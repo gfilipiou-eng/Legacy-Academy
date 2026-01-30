@@ -34,7 +34,7 @@
         /* --- NAVIGATION --- */
         nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 10000; display: flex; align-items: center; }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 25px; width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { height: 65px; display: block; }
+        .logo { height: 65px; }
         .nav-menu { display: flex; gap: 35px; list-style: none; }
         .nav-menu a { color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; transition: 0.3s; }
         .nav-menu a:hover { opacity: 1; color: var(--red); }
@@ -43,7 +43,7 @@
         /* --- MAIN LAYOUT --- */
         main { max-width: 1200px; margin: 40px auto 60px; padding: 0 20px; display: grid; grid-template-columns: 420px 1fr; gap: 60px; }
 
-        /* --- 3D CARD (DRAG) --- */
+        /* --- 3D CARD (DRAG INTERACTIVE) --- */
         .card-container { perspective: 2000px; position: sticky; top: 140px; z-index: 100; cursor: grab; }
         .card-container:active { cursor: grabbing; }
         .card { 
@@ -139,11 +139,11 @@
                 </div>
                 
                 <div class="socials">
-                    <a class="social-pill" href="http://googleusercontent.com/spotify.com/8" target="_blank" onclick="playClick()"><i class="fab fa-spotify"></i> Spotify</a>
-                    <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank" onclick="playClick()"><i class="fab fa-tiktok"></i> TikTok</a>
-                    <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank" onclick="playClick()"><i class="fab fa-instagram"></i> Instagram</a>
-                    <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank" onclick="playClick()"><i class="fab fa-youtube"></i> YouTube</a>
-                    <a class="social-pill email-btn" href="mailto:filippostailakidis@outlook.de" onclick="playClick()">Email Me</a>
+                    <a class="social-pill" href="http://googleusercontent.com/spotify.com/9" target="_blank"><i class="fab fa-spotify"></i> Spotify</a>
+                    <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>
+                    <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a class="social-pill email-btn" href="mailto:filippostailakidis@outlook.de">Email Me</a>
                 </div>
             </aside>
         </div>
@@ -170,21 +170,26 @@
         <img id="modalImg" src="">
     </div>
 
-    <audio id="clickSound" src="https://www.soundjay.com/buttons/button-50.mp3" preload="auto"></audio>
+    <audio id="clickSound">
+        <source src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YTtvT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19vT19v" type="audio/wav">
+    </audio>
 
     <script>
-        function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
-        function openModal(src) { const m = document.getElementById("modal"); document.getElementById("modalImg").src = src; m.classList.add("show"); document.body.style.overflow = 'hidden'; }
-        function closeModal() { const m = document.getElementById("modal"); m.classList.remove("show"); document.body.style.overflow = 'auto'; }
-        document.getElementById("modal").addEventListener("click", function (e) { if (e.target === this) closeModal(); });
-
         const card = document.getElementById('tiltCard');
         const container = document.getElementById('cardContainer');
         const clickSound = document.getElementById('clickSound');
 
-        function playClick() { clickSound.currentTime = 0; clickSound.play(); }
+        function playClick() {
+            clickSound.currentTime = 0;
+            clickSound.play().catch(() => {});
+        }
 
-        // --- DRAG ENGINE ---
+        document.querySelectorAll('.social-pill').forEach(btn => {
+            btn.addEventListener('mousedown', playClick);
+            btn.addEventListener('touchstart', playClick);
+        });
+
+        // --- DRAG ROTATE ENGINE ---
         let isDragging = false;
         let startX, startY;
 
@@ -192,6 +197,8 @@
             isDragging = true;
             startX = (e.touches ? e.touches[0].pageX : e.pageX);
             startY = (e.touches ? e.touches[0].pageY : e.pageY);
+            // Ξεκλείδωμα ήχου
+            clickSound.play().then(() => { clickSound.pause(); });
         };
 
         const stopDragging = () => {
@@ -216,6 +223,10 @@
         window.addEventListener('touchmove', moveCard, {passive: false});
         window.addEventListener('mouseup', stopDragging);
         window.addEventListener('touchend', stopDragging);
+
+        function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
+        function openModal(src) { document.getElementById("modalImg").src = src; document.getElementById("modal").classList.add("show"); document.body.style.overflow = 'hidden'; }
+        function closeModal() { document.getElementById("modal").classList.remove("show"); document.body.style.overflow = 'auto'; }
     </script>
 </body>
 </html>
