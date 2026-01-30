@@ -13,114 +13,106 @@
         :root {
             --gold: #c5a059;
             --red: #ff0000;
-            --verify-blue: #0095f6;
+            --red-glass: rgba(180, 0, 0, 0.1);
+            --red-border: rgba(255, 0, 0, 0.25);
             --bg: #000000;
-            --card: #0c0c0c;
             --nav-h: 100px;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
-        body { background: var(--bg); color: #e9e9e9; font-family: 'Inter', sans-serif; padding-top: var(--nav-h); overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; outline: none; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; padding-top: var(--nav-h); overflow-x: hidden; }
 
         /* --- BACKGROUND --- */
         .bg-gradient { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; overflow: hidden; }
         .bg-gradient::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background-image: linear-gradient(rgba(255, 0, 0, 0.08) 1.5px, transparent 1.5px), linear-gradient(90deg, rgba(255, 0, 0, 0.08) 1.5px, transparent 1.5px);
-            background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); animation: gridMove 12s linear infinite;
+            background-size: 60px 60px; transform: perspective(500px) rotateX(60deg); animation: gridMove 15s linear infinite;
         }
         @keyframes gridMove { from { transform: translateY(0); } to { transform: translateY(60px); } }
 
         /* --- NAVIGATION --- */
-        nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 10000; display: flex; align-items: center; }
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
+            background: rgba(0, 0, 0, 0.95); backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05); z-index: 10000;
+            display: flex; align-items: center;
+        }
         .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 25px; width: 100%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { height: 65px; }
+        .logo { height: 65px; display: block; }
         .nav-menu { display: flex; gap: 35px; list-style: none; }
         .nav-menu a { color: #fff; text-decoration: none; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.6; transition: 0.3s; }
         .nav-menu a:hover { opacity: 1; color: var(--red); }
         .menu-toggle { display: none; color: var(--red); font-size: 22px; cursor: pointer; }
 
         /* --- MAIN LAYOUT --- */
-        main { max-width: 1200px; margin: 40px auto 60px; padding: 0 20px; display: grid; grid-template-columns: 400px 1fr; gap: 50px; }
+        main { max-width: 1200px; margin: 40px auto 80px; padding: 0 20px; display: grid; grid-template-columns: 400px 1fr; gap: 60px; }
 
-        /* --- 3D FLOATING ILLUSION CARD --- */
-        .card-container { perspective: 1500px; position: sticky; top: 130px; z-index: 100; }
+        /* --- PREMIUM CARD --- */
         .card { 
-            background: var(--card); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 35px; 
-            padding: 50px 30px; 
-            text-align: center; 
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
-            transform-style: preserve-3d;
-            transform: rotateX(10deg) rotateY(-5deg); 
-            transition: transform 0.4s ease;
+            background: var(--red-glass); border: 1px solid var(--red-border); border-radius: 40px; 
+            padding: 50px 30px; text-align: center; backdrop-filter: blur(40px) saturate(150%);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.8); position: sticky; top: 130px;
         }
-        .card:hover { transform: rotateX(0deg) rotateY(0deg) translateZ(20px); }
+        .profile-photo { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid #000; margin-bottom: 25px; }
+        
+        .name-container { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
+        .card-name { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 900; letter-spacing: 0.5px; text-transform: uppercase; color: #fff; }
+        .verify-badge { color: #007AFF; font-size: 1.1rem; }
+        
+        .badges-row { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; }
+        .role-badge { background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); padding: 4px 12px; border-radius: 6px; font-size: 9px; font-weight: 800; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; }
 
-        .profile-wrapper { position: relative; width: 140px; height: 140px; margin: 0 auto 25px; display: flex; align-items: center; justify-content: center; transform: translateZ(50px); }
-        .circle-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
-        .circle-svg circle { fill: none; stroke: var(--red); stroke-width: 3; stroke-dasharray: 440; opacity: 0.6; }
-
-        .profile-photo { width: 125px; height: 125px; border-radius: 50%; object-fit: cover; border: 4px solid #000; position: relative; z-index: 2; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-
-        /* --- NAME & VERIFY --- */
-        .name-container { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 25px; transform: translateZ(30px); }
-        .card-name { font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 900; color: #fff; }
-        .verify-badge { color: var(--verify-blue); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; }
-
-        /* --- SOCIAL BUTTONS WITH PRESS EFFECT --- */
-        .socials { display: flex; flex-direction: column; gap: 12px; transform: translateZ(20px); }
+        /* --- SOCIAL BUTTONS --- */
+        .socials { display: flex; flex-direction: column; gap: 12px; }
         .social-pill { 
             display: flex; align-items: center; justify-content: center; gap: 12px; 
-            padding: 15px; border-radius: 16px; background: rgba(255, 255, 255, 0.04); 
+            padding: 16px; border-radius: 18px; background: rgba(255, 255, 255, 0.04); 
             border: 1px solid rgba(255, 255, 255, 0.08); color: white; text-decoration: none; 
-            font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; 
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 0 rgba(0,0,0,0.3);
+            font-weight: 700; font-size: 14px; transition: 0.3s ease; 
         }
         
-        .social-pill:active { 
-            transform: translateY(3px) translateZ(10px); 
-            box-shadow: 0 1px 0 rgba(0,0,0,0.3);
-            background: rgba(255, 255, 255, 0.1);
+        /* HOVER EFFECTS FOR EACH STYLE */
+        .spotify-btn:hover { border-color: #1DB954; color: #1DB954; background: rgba(29, 185, 84, 0.05); }
+        .youtube-btn:hover { border-color: #FF0000; color: #FF0000; background: rgba(255, 0, 0, 0.05); }
+        .tiktok-btn:hover { border-color: #00f2ea; color: #00f2ea; background: rgba(0, 242, 234, 0.05); }
+        .instagram-btn:hover { border-color: #E1306C; color: #E1306C; background: rgba(225, 48, 108, 0.05); }
+        
+        /* THE STYLED EMAIL BUTTON */
+        .email-btn { background: #fff !important; color: #000 !important; font-weight: 900 !important; border: none !important; margin-top: 10px; }
+        .email-btn:hover { background: var(--gold) !important; transform: scale(1.02); }
+        .email-btn i { font-size: 16px; }
+
+        /* --- BIO --- */
+        h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; margin-bottom: 30px; letter-spacing: -3px; }
+        .bio-box { 
+            background: var(--red-glass); border: 1px solid var(--red-border); 
+            border-radius: 35px; padding: 40px; backdrop-filter: blur(30px); 
+            margin-bottom: 50px; border-left: 5px solid var(--red);
         }
+        .bio-text { line-height: 1.8; color: #ccc; font-size: 1.1rem; }
 
-        .social-pill.email-btn { 
-            background: var(--gold); 
-            color: #000; 
-            font-weight: 900; 
-            border: none;
-            box-shadow: 0 4px 0 #8a6d3b;
-        }
-        .social-pill.email-btn:active {
-            box-shadow: 0 1px 0 #8a6d3b;
-            background: #e0b970;
-        }
+        /* --- GALLERY --- */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 15px; }
+        .gallery-item { aspect-ratio: 1/1; overflow: hidden; border-radius: 25px; border: 0.5px solid var(--red-border); cursor: pointer; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .gallery-item:hover img { transform: scale(1.05); }
 
-        /* --- CONTENT --- */
-        h1 { font-family: 'Montserrat', sans-serif; font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; margin-bottom: 30px; letter-spacing: -2px; }
-        .bio { background: rgba(255, 255, 255, 0.02); border-radius: 25px; padding: 40px; margin-bottom: 50px; border-left: 4px solid var(--red); }
-        .bio p { color: #aaa; line-height: 1.8; font-size: 1.1rem; }
+        /* --- LIGHTBOX --- */
+        #lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.98); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
+        #lightbox.active { display: flex; }
+        #lightbox img { max-width: 90%; max-height: 85vh; border-radius: 20px; border: 1px solid var(--red-border); }
+        #close-lightbox { position: absolute; top: 30px; right: 30px; font-size: 40px; color: #fff; cursor: pointer; }
 
-        .gallery-header { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.1rem; color: #fff; text-transform: uppercase; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
-        .gallery-header::after { content: ""; flex: 1; height: 1px; background: rgba(255, 0, 0, 0.15); }
-
-        .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-        .gallery-item { aspect-ratio: 1 / 1; overflow: hidden; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* --- MOBILE --- */
         @media (max-width: 900px) {
             nav { height: 80px; } .logo { height: 50px; }
             .menu-toggle { display: block; }
-            .nav-menu { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: #000; flex-direction: column; padding: 40px; border-bottom: 2px solid var(--red); }
+            .nav-menu { display: none; position: absolute; top: 80px; left: 0; width: 100%; background: #000; flex-direction: column; padding: 40px; text-align: center; border-bottom: 2px solid var(--red); }
             .nav-menu.active { display: flex; }
-            main { grid-template-columns: 1fr; margin-top: 0; gap: 30px; }
-            .card-container { position: relative; top: 0; margin: 10px 10px 40px; perspective: 1000px; }
-            .card { transform: rotateX(8deg); box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
-            .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 10px; }
+            main { grid-template-columns: 1fr; margin-top: 20px; }
+            .card { position: relative; top: 0; margin-bottom: 40px; }
             h1 { text-align: center; }
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         }
     </style>
 </head>
@@ -144,55 +136,66 @@
     <main>
         <div class="card-container">
             <aside class="card">
-                <div class="profile-wrapper">
-                    <svg class="circle-svg" viewBox="0 0 150 150">
-                        <circle cx="75" cy="75" r="72"></circle>
-                    </svg>
-                    <img src="image/filip.jpg" class="profile-photo" alt="Filippos">
-                </div>
-                
+                <img src="image/filip.jpg" class="profile-photo" alt="Filippos Tailakidis">
                 <div class="name-container">
-                    <div class="card-name">FILIPPOS</div>
-                    <div class="verify-badge">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
+                    <div class="card-name">Filippos Tailakidis</div>
+                    <div class="verify-badge"><i class="fas fa-check-circle"></i></div>
                 </div>
-                
+                <div class="badges-row">
+                    <span class="role-badge">Founder</span>
+                    <span class="role-badge">Investor</span>
+                </div>
+
                 <div class="socials">
-                    <a class="social-pill" href="https://open.spotify.com/user/tailakidis" target="_blank">
-                        <i class="fab fa-spotify"></i> Spotify
-                    </a>
-                    <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank">
-                        <i class="fab fa-tiktok"></i> TikTok
-                    </a>
-                    <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank">
-                        <i class="fab fa-instagram"></i> Instagram
-                    </a>
+                    <a class="social-pill spotify-btn" href="https://open.spotify.com/user/your_id0" target="_blank"><i class="fab fa-spotify"></i> SPOTIFY</a>
+                    <a class="social-pill youtube-btn" href="https://youtube.com/@filippostailakidis_" target="_blank"><i class="fab fa-youtube"></i> YOUTUBE</a>
+                    <a class="social-pill tiktok-btn" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank"><i class="fab fa-tiktok"></i> TIKTOK</a>
+                    <a class="social-pill instagram-btn" href="https://www.instagram.com/tailakidis_" target="_blank"><i class="fab fa-instagram"></i> INSTAGRAM</a>
+                    
                     <a class="social-pill email-btn" href="mailto:filippostailakidis@outlook.de">
-                        <i class="fas fa-envelope"></i> Email Me
+                        <i class="fas fa-envelope"></i> EMAIL
                     </a>
                 </div>
             </aside>
         </div>
 
         <section>
-            <h1>FILIPPOS TAILAKIDIS</h1>
-            <div class="bio">
-                <p>Entrepreneur and code visionary, founder of Legacy Academy. I build legacy-grade systems that bridge strategic engineering with uncompromising design.</p>
+            <h1>FILIPPOS <br><span style="color:var(--red)">TAILAKIDIS</span></h1>
+            
+            <div class="bio-box">Bio
+                <div class="bio-text">
+                    Founder & CEO of <b>Legacy Academy</b>, investor, and tech visionary. Focused on high-stakes strategy and elite engineering, I develop systems designed to break conventional boundaries.
+                    <br><br>
+                    My goal is to provide the tools and high-level mentorship for individuals ready to master their financial future and build a lasting <b>Legacy</b>.
+                </div>
             </div>
-            <div class="gallery-header"><i class="fas fa-camera-retro"></i> Gallery</div>
+            
             <div class="gallery">
-                <div class="gallery-item"><img src="image/gallery1.jpg"></div>
-                <div class="gallery-item"><img src="image/gallery2.jpg"></div>
-                <div class="gallery-item"><img src="image/gallery3.jpg"></div>
-                <div class="gallery-item"><img src="image/gallery4.jpg"></div>
-                <div class="gallery-item"><img src="image/gallery5.jpg"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery1.jpg"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery2.jpg"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery3.jpg"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery4.jpg"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery5.jpg"></div>
             </div>
         </section>
     </main>
 
+    <div id="lightbox" onclick="closeZoom()">
+        <div id="close-lightbox">✕</div>
+        <img id="zoom-img" src="">
+    </div>
+
     <script>
         function toggleMenu() { document.getElementById("navMenu").classList.toggle("active"); }
+        function zoomImg(el) {
+            document.getElementById('zoom-img').src = el.querySelector('img').src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeZoom() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
     </script>
 </body>
 </html>
