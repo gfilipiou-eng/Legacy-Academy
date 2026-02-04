@@ -12,7 +12,7 @@
         :root {
             --gold: #c5a059;
             --red: #ff3131;
-            --red-glow: rgba(255, 49, 49, 0.5);
+            --red-glow: rgba(255, 49, 49, 0.6);
             --bg: #050505;
             --glass-border: rgba(255, 255, 255, 0.08);
             --font-main: 'Inter', sans-serif;
@@ -34,113 +34,164 @@
         nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1200px; height: var(--nav-h); z-index: 10000; border-radius: 20px; display: flex; align-items: center; background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); }
         .nav-inner { width: 100%; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; }
         
-        .logo { height: 50px; display: block; transition: 0.3s; }
+        .logo { height: 45px; display: block; transition: 0.3s; }
         .logo img { height: 100%; object-fit: contain; }
-        .logo:hover { opacity: 0.8; }
 
         .nav-menu { display: flex; gap: 30px; list-style: none; }
         .nav-menu a { color: #fff; text-decoration: none; font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; opacity: 0.5; transition: 0.3s; }
         .nav-menu a:hover { opacity: 1; color: var(--gold); }
         
         .menu-toggle { display: none; color: #fff; font-size: 24px; cursor: pointer; transition: 0.3s; }
-        .menu-toggle:hover { color: var(--red); }
 
         /* --- LAYOUT --- */
-        main { max-width: 1200px; margin: 140px auto 80px; padding: 0 20px; display: grid; grid-template-columns: 400px 1fr; gap: 60px; }
+        main { max-width: 1200px; margin: 140px auto 80px; padding: 0 20px; display: grid; grid-template-columns: 420px 1fr; gap: 60px; }
 
-        /* --- CYBER PHOTO SCANNER --- */
+        /* --- CYBER CORE (ADVANCED PARALLAX) --- */
+        .photo-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 30px;
+            perspective: 1500px; /* Enhanced perspective */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .photo-wrapper { 
             position: relative; 
-            width: 220px; 
-            height: 220px; 
-            margin: 0 auto 30px; 
+            width: 100%; 
+            height: 100%; 
             display: flex; 
             align-items: center; 
-            justify-content: center; 
+            justify-content: center;
+            transform-style: preserve-3d;
+            transition: transform 0.15s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .profile-photo { 
-            width: 150px; 
-            height: 150px; 
+            width: 160px; 
+            height: 160px; 
             border-radius: 50%; 
             object-fit: cover; 
-            border: 2px solid var(--red); 
-            z-index: 5; 
+            z-index: 10; 
             position: relative; 
-            box-shadow: 0 0 20px var(--red-glow);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+            transform: translateZ(50px); /* Pops out more */
         }
 
-        .cyber-rings-container { position: absolute; inset: 0; z-index: 1; }
-        .ring-layer { position: absolute; inset: 0; border-radius: 50%; border: 1px solid transparent; }
-        .ring-1 { border: 1px solid rgba(255, 49, 49, 0.4); border-top-color: transparent; border-bottom-color: transparent; animation: spin 4s linear infinite; }
-        .ring-2 { inset: 10px; border: 1px dashed rgba(197, 160, 89, 0.5); animation: spin 8s linear reverse infinite; }
-        .ring-3 { inset: -15px; border: 2px solid rgba(255, 49, 49, 0.1); border-left-color: var(--red); filter: blur(1px); animation: spin 2s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
+        .hologram-rings {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            transform-style: preserve-3d;
+        }
 
-        .scanner-line { position: absolute; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--red), transparent); z-index: 6; top: 50%; left: 0; opacity: 0.5; animation: scanMove 3s ease-in-out infinite; pointer-events: none; }
-        @keyframes scanMove { 0% { transform: translateY(-75px) scaleX(0.5); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(75px) scaleX(0.5); opacity: 0; } }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .ring-svg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) translateZ(20px);
+            width: 100%;
+            height: 100%;
+        }
 
-        .orbit-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); pointer-events: none; z-index: 10; }
+        .ring-path {
+            fill: none;
+            stroke-width: 1.2;
+            stroke-linecap: round;
+            transform-origin: center;
+        }
+
+        .ring-path.outer {
+            stroke: var(--red);
+            stroke-dasharray: 60 140;
+            opacity: 0.4;
+            animation: ringRotate 15s linear infinite;
+        }
+
+        .ring-path.middle {
+            stroke: var(--gold);
+            stroke-dasharray: 3 15;
+            opacity: 0.3;
+            animation: ringRotate 25s linear reverse infinite;
+        }
+
+        .ring-path.inner {
+            stroke: var(--red);
+            stroke-dasharray: 120 160;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 12px var(--red));
+            animation: ringRotate 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+        }
+
+        @keyframes ringRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .core-glow {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--red-glow) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+            transform: translateZ(-20px);
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .scanner-ray {
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent, rgba(255, 49, 49, 0.4), transparent 40%);
+            z-index: 5;
+            opacity: 0.15;
+            transform: translateZ(35px);
+            animation: ringRotate 4s linear infinite;
+        }
 
         /* --- PROFILE CARD --- */
-        .profile-card { background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); padding: 50px 30px; border-radius: 40px; text-align: center; position: sticky; top: 130px; }
-        .name-container { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
-        .card-name { font-family: var(--font-title); font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
+        .profile-card { background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); padding: 50px 30px; border-radius: 40px; text-align: center; position: sticky; top: 120px; }
+        .name-container { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .card-name { font-family: var(--font-title); font-size: 1.4rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
         .verify-badge { color: #007AFF; font-size: 1.1rem; }
-        .role-badge { background: rgba(255, 255, 255, 0.05); padding: 5px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 9px; color: var(--gold); margin: 0 5px; }
+        .role-badge { background: rgba(255, 255, 255, 0.05); padding: 5px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 9px; color: var(--gold); margin: 0 5px; text-transform: uppercase; font-weight: 700; }
         
-        .socials { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
-        .social-pill { padding: 18px; border-radius: 20px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); color: white; text-decoration: none; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; transition: 0.3s; }
-        .social-pill:hover { background: rgba(255,255,255,0.05); transform: translateY(-3px); border-color: var(--red); }
-        .email-btn { background: #fff !important; color: #000 !important; font-weight: 900 !important; }
+        .socials { display: flex; flex-direction: column; gap: 12px; margin-top: 35px; }
+        .social-pill { padding: 18px; border-radius: 20px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); color: white; text-decoration: none; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; transition: 0.4s; display: flex; align-items: center; justify-content: center; gap: 12px; }
+        .social-pill:hover { background: rgba(255,255,255,0.05); transform: translateY(-3px); border-color: var(--red); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        .email-btn { background: #fff !important; color: #000 !important; font-weight: 900 !important; border: none !important; }
 
         /* --- CONTENT --- */
         h1 { font-family: var(--font-title); font-size: clamp(3rem, 8vw, 5rem); font-weight: 900; letter-spacing: -4px; line-height: 0.85; margin-bottom: 30px; }
         .bio-box { background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-left: 4px solid var(--red); padding: 50px; border-radius: 40px; margin-bottom: 50px; }
-        .bio-box h2 { font-family: var(--font-mono); font-size: 10px; color: var(--gold); letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
-        .bio-text { color: #ccc; font-size: 1.1rem; }
+        .bio-box h2 { font-family: var(--font-mono); font-size: 10px; color: var(--gold); letter-spacing: 6px; margin-bottom: 20px; text-transform: uppercase; }
+        .bio-text { color: #ccc; font-size: 1.1rem; font-weight: 300; }
         
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-        .gallery-item { aspect-ratio: 1/1; overflow: hidden; border-radius: 30px; border: 1px solid var(--glass-border); cursor: pointer; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
-        .gallery-item:hover img { transform: scale(1.1); }
+        .gallery-item { aspect-ratio: 1/1; overflow: hidden; border-radius: 35px; border: 1px solid var(--glass-border); cursor: pointer; position: relative; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
+        .gallery-item:hover img { transform: scale(1.1) rotate(1deg); }
 
-        #lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.95); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(20px); }
+        #lightbox { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.96); z-index: 20000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(25px); }
         #lightbox.active { display: flex; }
-        #lightbox img { max-width: 90%; max-height: 80vh; border-radius: 30px; }
+        #lightbox img { max-width: 90%; max-height: 80vh; border-radius: 35px; border: 1px solid rgba(255,255,255,0.1); }
 
-        /* --- MOBILE RESPONSIVE --- */
+        /* --- MOBILE --- */
         @media (max-width: 900px) {
-            main { grid-template-columns: 1fr; margin-top: 120px; }
+            main { grid-template-columns: 1fr; margin-top: 110px; }
             .profile-card { position: relative; top: 0; }
             h1 { text-align: center; }
-            
             .menu-toggle { display: block; }
-            
-            .nav-menu { 
-                position: fixed; 
-                top: 110px; 
-                left: 5%; 
-                width: 90%; 
-                background: rgba(10, 10, 10, 0.95); 
-                backdrop-filter: blur(30px);
-                border-radius: 25px; 
-                flex-direction: column; 
-                padding: 40px; 
-                border: 1px solid var(--glass-border);
-                transform: translateY(-20px);
-                opacity: 0;
-                pointer-events: none;
-                transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-                text-align: center;
-                gap: 25px;
-            }
-            .nav-menu.active { 
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: all;
-            }
+            .nav-menu { position: fixed; top: 100px; left: 5%; width: 90%; background: rgba(10, 10, 10, 0.98); border-radius: 25px; flex-direction: column; padding: 40px; border: 1px solid var(--glass-border); display: none; text-align: center; gap: 25px; }
+            .nav-menu.active { display: flex; }
             .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .photo-container { width: 260px; height: 260px; }
         }
     </style>
 </head>
@@ -150,11 +201,9 @@
     <nav>
         <div class="nav-inner">
             <a href="index.html" class="logo">
-                <img src="image/Logo.png" alt="Legacy Academy Logo">
+                <img src="image/Logo.png" alt="Legacy Academy">
             </a>
-            <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </div>
+            <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="index.html#packages">ACADEMY</a></li>
@@ -166,14 +215,22 @@
 
     <main>
         <aside class="profile-card">
-            <div class="photo-wrapper">
-                <div class="cyber-rings-container">
-                    <div class="ring-layer ring-1"></div>
-                    <div class="ring-layer ring-2"></div>
-                    <div class="ring-layer ring-3"></div>
+            <!-- Container for 3D Scene -->
+            <div class="photo-container" id="parallaxScene">
+                <div class="photo-wrapper" id="photoWrapper">
+                    <div class="core-glow" id="glowLayer"></div>
+                    <div class="scanner-ray"></div>
+                    
+                    <div class="hologram-rings">
+                        <svg class="ring-svg" viewBox="0 0 200 200">
+                            <circle class="ring-path outer" cx="100" cy="100" r="95" />
+                            <circle class="ring-path middle" cx="100" cy="100" r="88" />
+                            <circle class="ring-path inner" cx="100" cy="100" r="82" />
+                        </svg>
+                    </div>
+
+                    <img src="image/filip.jpg" class="profile-photo" alt="Filippos Tailakidis">
                 </div>
-                <img src="image/filip.jpg" class="profile-photo" alt="Filippos Tailakidis">
-                <div class="scanner-line"></div>
             </div>
 
             <div class="name-container">
@@ -184,6 +241,7 @@
                 <span class="role-badge">Founder</span>
                 <span class="role-badge">Investor</span>
             </div>
+
             <div class="socials">
                 <a class="social-pill" href="https://open.spotify.com/user/31dcojj2flngqkzytjsq3i5wj75i" target="_blank"><i class="fab fa-spotify"></i> SPOTIFY</a>
                 <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank"><i class="fab fa-youtube"></i> YOUTUBE</a>
@@ -192,13 +250,13 @@
                 <a class="social-pill email-btn" href="mailto:filippostailakidis@outlook.de"><i class="fas fa-envelope"></i> EMAIL</a>
             </div>
         </aside>
-        
+
         <section>
             <h1>FILIPPOS <br><span style="color:var(--red)">TAILAKIDIS</span></h1>
             <div class="bio-box">
                 <h2>Bio</h2>
                 <div class="bio-text">
-                    Founder & CEO of <b>Legacy Academy</b>, investor, and tech visionary. Focused on high-stakes strategy and elite engineering. My goal is to provide the tools and high-level mentorship for individuals ready to master their financial future and build a lasting <b>Legacy</b>.
+                    Founder & CEO of <b>Legacy Academy</b>, investor, and tech visionary. Operating at the intersection of high-stakes strategy and elite engineering, I develop systems designed to dismantle conventional boundaries. My mission is to provide the tools and high-level mentorship for individuals ready to <b>master their financial future</b> and build a <b>lasting legacy</b>.
                 </div>
             </div>
             <div class="gallery">
@@ -218,59 +276,52 @@
             const menu = document.getElementById("navMenu");
             const icon = document.querySelector("#menuToggle i");
             menu.classList.toggle("active");
-            
-            // Toggle icon from bars to X
-            if (menu.classList.contains("active")) {
-                icon.classList.remove("fa-bars");
-                icon.classList.add("fa-times");
-            } else {
-                icon.classList.remove("fa-times");
-                icon.classList.add("fa-bars");
-            }
+            icon.classList.toggle("fa-bars");
+            icon.classList.toggle("fa-times");
         }
         
         function zoomImg(el) { 
             document.getElementById('zoom-img').src = el.querySelector('img').src; 
             document.getElementById('lightbox').classList.add('active'); 
         }
-        
-        // Orbital dots for the photo wrapper
-        (function(){
-            const wrapper = document.querySelector('.photo-wrapper');
-            if(!wrapper) return;
-            const numDots = 4;
-            for(let i=0; i<numDots; i++){
-                const d = document.createElement('div');
-                d.className = 'orbit-dot';
-                d.dataset.base = Math.random() * Math.PI * 2;
-                d.dataset.radius = 90 + i * 12;
-                d.dataset.speed = 0.4 + (i * 0.15);
-                wrapper.appendChild(d);
-            }
-            let start = performance.now();
-            function loop(now){
-                const t = (now - start) / 1000;
-                const dots = document.querySelectorAll('.orbit-dot');
-                const centerX = wrapper.offsetWidth / 2;
-                const centerY = wrapper.offsetHeight / 2;
-                dots.forEach((d, i) => {
-                    const speed = parseFloat(d.dataset.speed);
-                    const angle = parseFloat(d.dataset.base) + t * speed;
-                    const r = parseFloat(d.dataset.radius);
-                    d.style.left = (centerX + Math.cos(angle) * r) + 'px';
-                    d.style.top = (centerY + Math.sin(angle) * r * 0.85) + 'px';
-                    d.style.opacity = 0.6 + Math.random() * 0.4;
-                });
-                requestAnimationFrame(loop);
-            }
-            requestAnimationFrame(loop);
-        })();
 
-        // Close menu on link click
+        // --- ENHANCED PARALLAX TILT LOGIC ---
+        const scene = document.getElementById('parallaxScene');
+        const wrapper = document.getElementById('photoWrapper');
+        const glow = document.getElementById('glowLayer');
+
+        document.addEventListener('mousemove', (e) => {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            // Calculate distance from center for a "following" feel
+            const moveX = (e.clientX - centerX) / 15;
+            const moveY = (e.clientY - centerY) / 15;
+
+            // Tilt the whole wrapper
+            wrapper.style.transform = `rotateY(${moveX}deg) rotateX(${-moveY}deg)`;
+            
+            // Move the glow slightly in the opposite direction for depth
+            glow.style.transform = `translate3d(${-moveX * 2}px, ${-moveY * 2}px, -20px)`;
+        });
+
+        // Reset on mouse leave
+        document.addEventListener('mouseleave', () => {
+            wrapper.style.transition = 'transform 0.8s ease';
+            wrapper.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            glow.style.transform = `translate3d(0, 0, -20px)`;
+        });
+
+        // Restore transitionless movement on re-enter
+        document.addEventListener('mouseenter', () => {
+            wrapper.style.transition = 'none';
+        });
+
+        // Auto-close menu
         document.querySelectorAll('.nav-menu a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById("navMenu").classList.remove("active");
-                document.querySelector("#menuToggle i").classList.replace("fa-times", "fa-bars");
+                document.querySelector("#menuToggle i").className = "fas fa-bars";
             });
         });
     </script>
