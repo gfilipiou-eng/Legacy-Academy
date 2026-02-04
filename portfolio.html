@@ -18,6 +18,7 @@
             --font-main: 'Inter', sans-serif;
             --font-title: 'Montserrat', sans-serif;
             --font-mono: 'Space Grotesk', sans-serif;
+            --nav-h: 80px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; outline: none; }
@@ -30,17 +31,22 @@
         .grid-content { position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px); background-size: 60px 60px; transform: rotateX(60deg); }
 
         /* --- NAVIGATION --- */
-        nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1200px; height: 70px; z-index: 10000; border-radius: 20px; display: flex; align-items: center; background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); }
+        nav { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1200px; height: var(--nav-h); z-index: 10000; border-radius: 20px; display: flex; align-items: center; background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); }
         .nav-inner { width: 100%; padding: 0 30px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-family: var(--font-title); font-weight: 900; font-size: 20px; color: #fff; text-decoration: none; }
-        .logo span { color: var(--red); }
+        
+        .logo { height: 50px; display: block; transition: 0.3s; }
+        .logo img { height: 100%; object-fit: contain; }
+        .logo:hover { opacity: 0.8; }
+
         .nav-menu { display: flex; gap: 30px; list-style: none; }
         .nav-menu a { color: #fff; text-decoration: none; font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; opacity: 0.5; transition: 0.3s; }
         .nav-menu a:hover { opacity: 1; color: var(--gold); }
-        .menu-toggle { display: none; color: #fff; font-size: 20px; cursor: pointer; }
+        
+        .menu-toggle { display: none; color: #fff; font-size: 24px; cursor: pointer; transition: 0.3s; }
+        .menu-toggle:hover { color: var(--red); }
 
         /* --- LAYOUT --- */
-        main { max-width: 1200px; margin: 120px auto 80px; padding: 0 20px; display: grid; grid-template-columns: 400px 1fr; gap: 60px; }
+        main { max-width: 1200px; margin: 140px auto 80px; padding: 0 20px; display: grid; grid-template-columns: 400px 1fr; gap: 60px; }
 
         /* --- CYBER PHOTO SCANNER --- */
         .photo-wrapper { 
@@ -77,14 +83,15 @@
         .orbit-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 12px var(--red); pointer-events: none; z-index: 10; }
 
         /* --- PROFILE CARD --- */
-        .profile-card { background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); padding: 50px 30px; border-radius: 40px; text-align: center; position: sticky; top: 120px; }
+        .profile-card { background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); padding: 50px 30px; border-radius: 40px; text-align: center; position: sticky; top: 130px; }
         .name-container { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 10px; }
         .card-name { font-family: var(--font-title); font-size: 1.4rem; font-weight: 900; text-transform: uppercase; }
         .verify-badge { color: #007AFF; font-size: 1.1rem; }
         .role-badge { background: rgba(255, 255, 255, 0.05); padding: 5px 14px; border-radius: 8px; font-family: var(--font-mono); font-size: 9px; color: var(--gold); margin: 0 5px; }
+        
         .socials { display: flex; flex-direction: column; gap: 12px; margin-top: 30px; }
         .social-pill { padding: 18px; border-radius: 20px; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); color: white; text-decoration: none; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; transition: 0.3s; }
-        .social-pill:hover { background: rgba(255,255,255,0.05); transform: translateY(-3px); }
+        .social-pill:hover { background: rgba(255,255,255,0.05); transform: translateY(-3px); border-color: var(--red); }
         .email-btn { background: #fff !important; color: #000 !important; font-weight: 900 !important; }
 
         /* --- CONTENT --- */
@@ -92,6 +99,7 @@
         .bio-box { background: rgba(15, 15, 15, 0.4); backdrop-filter: blur(25px); border: 1px solid var(--glass-border); border-left: 4px solid var(--red); padding: 50px; border-radius: 40px; margin-bottom: 50px; }
         .bio-box h2 { font-family: var(--font-mono); font-size: 10px; color: var(--gold); letter-spacing: 5px; margin-bottom: 20px; text-transform: uppercase; }
         .bio-text { color: #ccc; font-size: 1.1rem; }
+        
         .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
         .gallery-item { aspect-ratio: 1/1; overflow: hidden; border-radius: 30px; border: 1px solid var(--glass-border); cursor: pointer; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s; }
@@ -101,11 +109,38 @@
         #lightbox.active { display: flex; }
         #lightbox img { max-width: 90%; max-height: 80vh; border-radius: 30px; }
 
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 900px) {
-            main { grid-template-columns: 1fr; margin-top: 100px; }
+            main { grid-template-columns: 1fr; margin-top: 120px; }
             .profile-card { position: relative; top: 0; }
             h1 { text-align: center; }
-            .nav-menu { display: none; }
+            
+            .menu-toggle { display: block; }
+            
+            .nav-menu { 
+                position: fixed; 
+                top: 110px; 
+                left: 5%; 
+                width: 90%; 
+                background: rgba(10, 10, 10, 0.95); 
+                backdrop-filter: blur(30px);
+                border-radius: 25px; 
+                flex-direction: column; 
+                padding: 40px; 
+                border: 1px solid var(--glass-border);
+                transform: translateY(-20px);
+                opacity: 0;
+                pointer-events: none;
+                transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+                text-align: center;
+                gap: 25px;
+            }
+            .nav-menu.active { 
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: all;
+            }
+            .gallery { grid-template-columns: repeat(2, 1fr); gap: 10px; }
         }
     </style>
 </head>
@@ -114,9 +149,13 @@
 
     <nav>
         <div class="nav-inner">
-            <a href="index.html" class="logo">LEGACY<span>ACADEMY</span></a>
-            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
-            <ul class="nav-menu">
+            <a href="index.html" class="logo">
+                <img src="image/Logo.png" alt="Legacy Academy Logo">
+            </a>
+            <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="index.html#packages">ACADEMY</a></li>
                 <li><a href="index.html#apply">APPLY</a></li>
@@ -133,45 +172,70 @@
                     <div class="ring-layer ring-2"></div>
                     <div class="ring-layer ring-3"></div>
                 </div>
-                <img src="image/filip.jpg" class="profile-photo">
+                <img src="image/filip.jpg" class="profile-photo" alt="Filippos Tailakidis">
                 <div class="scanner-line"></div>
             </div>
 
             <div class="name-container">
-                <div class="card-name">Filippos Tailakidis</div><i class="fas fa-check-circle verify-badge"></i>
+                <div class="card-name">Filippos Tailakidis</div>
+                <i class="fas fa-check-circle verify-badge"></i>
             </div>
-            <div class="badges-row"><span class="role-badge">Founder</span><span class="role-badge">Investor</span></div>
+            <div class="badges-row">
+                <span class="role-badge">Founder</span>
+                <span class="role-badge">Investor</span>
+            </div>
             <div class="socials">
-                <a class="social-pill" href="https://open.spotify.com/user/31dcojj2flngqkzytjsq3i5wj75i" target="_blank">SPOTIFY</a>
-                <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank">YOUTUBE</a>
-                <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank">TIKTOK</a>
-                <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank">INSTAGRAM</a>
-                <a class="social-pill email-btn" href="mailto:filippostailakidis@outlook.de">EMAIL</a>
+                <a class="social-pill" href="https://open.spotify.com/user/31dcojj2flngqkzytjsq3i5wj75i" target="_blank"><i class="fab fa-spotify"></i> SPOTIFY</a>
+                <a class="social-pill" href="https://youtube.com/@filippostailakidis_" target="_blank"><i class="fab fa-youtube"></i> YOUTUBE</a>
+                <a class="social-pill" href="https://www.tiktok.com/@filippos_tailakidis" target="_blank"><i class="fab fa-tiktok"></i> TIKTOK</a>
+                <a class="social-pill" href="https://www.instagram.com/tailakidis_" target="_blank"><i class="fab fa-instagram"></i> INSTAGRAM</a>
+                <a class="social-pill email-btn" href="mailto:filippostailakidis@outlook.de"><i class="fas fa-envelope"></i> EMAIL</a>
             </div>
         </aside>
+        
         <section>
             <h1>FILIPPOS <br><span style="color:var(--red)">TAILAKIDIS</span></h1>
             <div class="bio-box">
                 <h2>Bio</h2>
-                <div class="bio-text">Founder & CEO of <b>Legacy Academy</b>, investor, and tech visionary. Focused on high-stakes strategy and elite engineering. My goal is to provide the tools and high-level mentorship for individuals ready to master their financial future and build a lasting <b>Legacy</b>.</div>
+                <div class="bio-text">
+                    Founder & CEO of <b>Legacy Academy</b>, investor, and tech visionary. Focused on high-stakes strategy and elite engineering. My goal is to provide the tools and high-level mentorship for individuals ready to master their financial future and build a lasting <b>Legacy</b>.
+                </div>
             </div>
             <div class="gallery">
-                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery1.jpg"></div>
-                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery2.jpg"></div>
-                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery3.jpg"></div>
-                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery4.jpg"></div>
-                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery5.jpg"></div>
-                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery6.jpg"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery1.jpg" alt="Gallery 1"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery2.jpg" alt="Gallery 2"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery3.jpg" alt="Gallery 3"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery4.jpg" alt="Gallery 4"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery5.jpg" alt="Gallery 5"></div>
+                <div class="gallery-item" onclick="zoomImg(this)"><img src="image/gallery6.jpg" alt="Gallery 6"></div>
             </div>
         </section>
     </main>
 
-    <div id="lightbox" onclick="this.classList.remove('active')"><img id="zoom-img"></div>
+    <div id="lightbox" onclick="this.classList.remove('active')"><img id="zoom-img" src=""></div>
 
     <script>
-        function toggleMenu() { document.querySelector(".nav-menu").classList.toggle("active"); }
-        function zoomImg(el) { document.getElementById('zoom-img').src = el.querySelector('img').src; document.getElementById('lightbox').classList.add('active'); }
+        function toggleMenu() { 
+            const menu = document.getElementById("navMenu");
+            const icon = document.querySelector("#menuToggle i");
+            menu.classList.toggle("active");
+            
+            // Toggle icon from bars to X
+            if (menu.classList.contains("active")) {
+                icon.classList.remove("fa-bars");
+                icon.classList.add("fa-times");
+            } else {
+                icon.classList.remove("fa-times");
+                icon.classList.add("fa-bars");
+            }
+        }
         
+        function zoomImg(el) { 
+            document.getElementById('zoom-img').src = el.querySelector('img').src; 
+            document.getElementById('lightbox').classList.add('active'); 
+        }
+        
+        // Orbital dots for the photo wrapper
         (function(){
             const wrapper = document.querySelector('.photo-wrapper');
             if(!wrapper) return;
@@ -202,6 +266,14 @@
             }
             requestAnimationFrame(loop);
         })();
+
+        // Close menu on link click
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById("navMenu").classList.remove("active");
+                document.querySelector("#menuToggle i").classList.replace("fa-times", "fa-bars");
+            });
+        });
     </script>
 </body>
 </html>
