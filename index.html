@@ -200,6 +200,25 @@
         .btn-outline:hover { background: #fff; color: #000; border-color: #fff; }
         .btn-gold { background: var(--gold); color: #000; box-shadow: 0 15px 35px rgba(197, 160, 89, 0.3); }
 
+        /* --- TESTIMONIALS SECTION --- */
+        .trust-section { margin-bottom: 100px; }
+        .t-card {
+            padding: 50px; border-radius: 40px; border: 1px solid var(--glass-border);
+            position: relative; overflow: hidden; height: 100%;
+        }
+        .t-card i.quote-icon { position: absolute; top: 30px; right: 40px; font-size: 40px; opacity: 0.1; }
+        .t-quote { font-size: 18px; font-style: italic; color: #ccc; margin-bottom: 30px; line-height: 1.8; }
+        .t-user { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; color: var(--gold); font-weight: 700; text-transform: uppercase; }
+
+        .trust-pilot-btn {
+            display: inline-flex; align-items: center; gap: 15px;
+            margin-top: 50px; padding: 18px 35px; border-radius: 50px;
+            border: 1px solid #00b67a; color: #00b67a; text-decoration: none;
+            font-family: var(--font-title); font-weight: 900; font-size: 13px;
+            transition: 0.3s;
+        }
+        .trust-pilot-btn:hover { background: #00b67a; color: #fff; box-shadow: 0 10px 25px rgba(0, 182, 122, 0.3); }
+
         /* --- APPLY FORM --- */
         .apply-wrapper {
             max-width: 850px; margin: 0 auto; padding: 90px 70px;
@@ -280,6 +299,7 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">HOME</a></li>
                 <li><a href="#packages">ACADEMY</a></li>
+                <li><a href="#trust">REVIEWS</a></li>
                 <li><a href="#apply">APPLY</a></li>
                 <li><a href="portfolio.html">PORTFOLIO</a></li>
             </ul>
@@ -343,6 +363,27 @@
                 </ul>
                 <button class="pkg-btn btn-outline" onclick="selectPkg('Elite', 6250)">Ascend</button>
             </div>
+        </div>
+    </section>
+
+    <section class="container trust-section" id="trust">
+        <span class="category-label">Verified Protocol Feedback</span>
+        <div class="grid">
+            <div class="t-card liquid-glass">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <p class="t-quote">"The transition from gambling to systematic execution was instant. The AI signals are the closest thing to a cheat code."</p>
+                <div class="t-user">ALEX — GERMANY // TIER: PRO</div>
+            </div>
+            <div class="t-card liquid-glass">
+                <i class="fas fa-quote-right quote-icon"></i>
+                <p class="t-quote">"Legacy Academy isn't just about money. It's about changing the way you perceive the markets. 10/10."</p>
+                <div class="t-user">MARCO — UK // TIER: STARTER</div>
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <a href="https://www.trustpilot.com/review/legacyacademy.store" target="_blank" class="trust-pilot-btn">
+                <i class="fas fa-star"></i> VIEW ALL TRUSTPILOT REVIEWS
+            </a>
         </div>
     </section>
 
