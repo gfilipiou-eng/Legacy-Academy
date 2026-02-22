@@ -18,12 +18,14 @@
 }
 
 /* Reset & Base */
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background: var(--bg);
-  background-image: 
-    radial-gradient(circle at 10% 20%, rgba(197,160,89,0.06) 0%, transparent 50%),
-    radial-gradient(circle at 90% 80%, rgba(197,160,89,0.06) 0%, transparent 50%);
+  background: #000;
   color: #fff;
   font-family: var(--font-main);
   line-height: 1.6;
@@ -34,11 +36,12 @@ body {
 /* NAVBAR – ίδιο με index */
 nav {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: var(--nav-h);
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
+  background: #000;
+  border-bottom: none;
   display: flex;
   align-items: center;
   z-index: 10000;
@@ -54,7 +57,9 @@ nav {
   align-items: center;
 }
 
-.logo-img { height: 55px; }
+.logo-img {
+  height: 55px;
+}
 
 .nav-menu {
   display: flex;
@@ -71,10 +76,11 @@ nav {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   opacity: 0.85;
-  transition: 0.3s;
 }
 
-.nav-menu a:hover { opacity: 1; color: var(--gold); }
+.nav-menu a:hover {
+  opacity: 1;
+}
 
 /* MAIN CONTENT */
 main {
@@ -87,7 +93,11 @@ main {
 }
 
 @media (max-width: 980px) {
-  main { grid-template-columns: 1fr; padding: 0 20px; gap: 50px; }
+  main {
+    grid-template-columns: 1fr;
+    padding: 0 20px;
+    gap: 50px;
+  }
 }
 
 /* HERO / NAME */
@@ -101,22 +111,20 @@ h1 {
   text-transform: uppercase;
 }
 
-h1 span { color: var(--gold); display: block; }
+h1 span {
+  color: var(--gold);
+  display: block;
+}
 
 /* BIO CARD */
 .bio {
-  background: var(--card-bg);
+  background: #000;
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 32px;
-  backdrop-filter: blur(10px);
-  transition: 0.4s;
 }
 
-.bio:hover {
-  border-color: var(--gold);
-  box-shadow: 0 12px 40px rgba(197,160,89,0.15);
-}
+.bio:hover {}
 
 .bio h2 {
   color: var(--gold);
@@ -155,53 +163,47 @@ h1 span { color: var(--gold); display: block; }
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  background: #111;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-  transition: all 0.4s ease;
+  background: #000;
 }
 
-.gallery-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 50px rgba(197,160,89,0.25);
-  border: 1px solid var(--gold);
-}
+.gallery-item:hover {}
 
 .gallery-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  transition: transform 0.45s ease;
 }
 
-.gallery-item:hover img { transform: scale(1.12); }
+.gallery-item:hover img {}
 
 @media (max-width: 980px) {
-  .gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
 }
 
 @media (max-width: 600px) {
-  .gallery { grid-template-columns: 1fr; gap: 10px; }
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 /* PROFILE CARD – σαν pricing card */
 .card {
-  background: var(--card-bg);
+  background: #000;
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 40px 30px;
   text-align: center;
-  backdrop-filter: blur(10px);
-  transition: 0.4s;
   position: sticky;
   top: 110px;
   height: fit-content;
 }
 
-.card:hover {
-  border-color: var(--gold);
-  box-shadow: 0 15px 50px rgba(197,160,89,0.2);
-}
+.card:hover {}
 
 .badge {
   background: var(--gold);
@@ -214,7 +216,6 @@ h1 span { color: var(--gold); display: block; }
   letter-spacing: 1.5px;
   margin-bottom: 25px;
   display: inline-block;
-  box-shadow: 0 4px 15px var(--gold-glow);
 }
 
 /* Ring effect (από προηγούμενα) */
@@ -226,14 +227,14 @@ h1 span { color: var(--gold); display: block; }
 }
 
 .gold-ring {
-  position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  background: conic-gradient(from var(--rot, 0deg), var(--gold), transparent, var(--gold-bright), transparent, var(--gold));
-  animation: rotate 4s linear infinite;
+  display: none;
 }
 
-@keyframes rotate { to { --rot: 360deg; } }
+@keyframes rotate {
+  to {
+    --rot: 360deg;
+  }
+}
 
 .profile-photo {
   width: 100%;
@@ -241,11 +242,16 @@ h1 span { color: var(--gold); display: block; }
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #000;
-  box-shadow: inset 0 0 20px rgba(197,160,89,0.2);
+  box-shadow: inset 0 0 20px rgba(197, 160, 89, 0.2);
 }
 
 /* Social pills – gradient όπως buttons */
-.socials { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
+.socials {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
 
 .social-pill {
   display: flex;
@@ -273,21 +279,21 @@ h1 span { color: var(--gold); display: block; }
 .modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.96);
+  background: rgba(0, 0, 0, 0.96);
   display: none;
   align-items: center;
   justify-content: center;
   z-index: 999999;
-  backdrop-filter: blur(10px);
 }
 
-.modal.show { display: flex; }
+.modal.show {
+  display: flex;
+}
 
 .modal img {
   max-width: 92%;
   max-height: 92vh;
   border-radius: 16px;
-  box-shadow: 0 30px 80px rgba(0,0,0,0.9);
 }
 
 .modal-close {
@@ -297,20 +303,41 @@ h1 span { color: var(--gold); display: block; }
   font-size: 48px;
   color: white;
   cursor: pointer;
-  transition: color 0.3s;
 }
 
-.modal-close:hover { color: var(--gold); }
+.modal-close:hover {}
 
 /* Mobile fixes */
 @media (max-width: 980px) {
-  .nav-inner { padding: 0 25px; }
-  .logo-img { height: 48px; }
-  main { padding: 0 25px; }
+  .nav-inner {
+    padding: 0 25px;
+  }
+
+  .logo-img {
+    height: 48px;
+  }
+
+  main {
+    padding: 0 25px;
+  }
 }
 
 @media (max-width: 600px) {
-  .nav-inner { padding: 0 15px; }
-  h1 { font-size: 2.8rem; }
-  .bio { padding: 24px; }
+  .nav-inner {
+    padding: 0 15px;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+  }
+
+  .bio {
+    padding: 24px;
+  }
+}
+/* Disable transitions and animations globally */
+* {
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
 }
